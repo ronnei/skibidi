@@ -1,0 +1,549 @@
+html
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OMG Hub - Trang Nhận Key Official</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Three.js cho hiệu ứng 3D Grid Loop -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #04020a;
+            color: #ffffff;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+        }
+        
+        #webgl-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .neon-card {
+            position: relative;
+            background: rgba(11, 8, 22, 0.93);
+            backdrop-filter: blur(20px);
+            border-radius: 28px;
+            border: 1px solid rgba(147, 51, 234, 0.35);
+            box-shadow: 0 25px 55px rgba(0, 0, 0, 0.9),
+                        0 0 40px rgba(168, 85, 247, 0.22);
+            transition: transform 0.15s ease-out, box-shadow 0.3s ease;
+            transform-style: preserve-3d;
+        }
+
+        .neon-card::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 30px;
+            background: linear-gradient(135deg, #00f0ff, #a855f7, #ec4899, #00f0ff);
+            background-size: 300% 300%;
+            z-index: -1;
+            animation: borderGlow 6s ease infinite;
+            opacity: 0.8;
+        }
+
+        @keyframes borderGlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .neon-text-cyan {
+            text-shadow: 0 0 14px rgba(0, 240, 255, 0.85);
+        }
+
+        .pulse-glow {
+            animation: pulseGlow 2.5s infinite alternate ease-in-out;
+        }
+
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 15px rgba(0, 240, 255, 0.25); }
+            100% { box-shadow: 0 0 30px rgba(0, 240, 255, 0.6); }
+        }
+
+        ::-webkit-scrollbar { width: 4px; height: 4px; }
+        ::-webkit-scrollbar-track { background: #060210; }
+        ::-webkit-scrollbar-thumb { background: #00f0ff; border-radius: 4px; }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-3 sm:p-6 relative">
+
+    <!-- Canvas Three.js Không gian Vũ Trụ 3D -->
+    <canvas id="webgl-canvas"></canvas>
+
+    <!-- Thẻ Card Nhận Key Chính -->
+    <div class="w-full max-w-md z-10 my-auto" style="perspective: 1000px;">
+        <div id="mainCard" class="neon-card p-5 sm:p-7 shadow-2xl">
+            
+            <!-- Logo & Tiêu đề OMG Hub -->
+            <div class="flex flex-col items-center text-center">
+                <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-cyan-400 via-purple-500 to-pink-500 p-0.5 mb-3 shadow-lg shadow-cyan-500/30 pulse-glow">
+                    <div class="w-full h-full bg-[#0a0516] rounded-[14px] flex items-center justify-center">
+                        <svg class="w-8 h-8 text-cyan-400 animate-pulse" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                    </div>
+                </div>
+                <h1 class="text-3xl font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-sky-200 to-pink-400">
+                    OMG Hub
+                </h1>
+                <p class="text-cyan-400 text-xs sm:text-sm font-semibold tracking-wider mt-1 font-mono uppercase bg-cyan-950/60 px-3 py-1 rounded-full border border-cyan-500/30">
+                    script:omghub
+                </p>
+            </div>
+
+            <!-- Khối thông tin Trạng thái & Cơ chế đổi Key theo ngày -->
+            <div class="mt-5 space-y-2 text-xs">
+                <div class="bg-[#130b26]/90 border border-purple-900/50 rounded-xl p-3 flex items-center justify-between">
+                    <span class="text-slate-300 font-medium flex items-center gap-2">
+                        <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 0121 9z"/>
+                        </svg>
+                        Trạng Thái Hệ Thống:
+                    </span>
+                    <span class="text-emerald-400 font-bold bg-emerald-500/10 px-2.5 py-0.5 rounded border border-emerald-500/30 flex items-center gap-1">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                        Đang Hoạt Động
+                    </span>
+                </div>
+
+                <div class="grid grid-cols-2 gap-2 text-xs">
+                    <div class="bg-[#130b26]/90 border border-emerald-900/40 rounded-xl p-2.5 flex items-center justify-between">
+                        <span class="text-slate-400">Đổi Key:</span>
+                        <span class="text-amber-400 font-bold">00:00 Hàng Ngày</span>
+                    </div>
+                    <div class="bg-[#130b26]/90 border border-cyan-900/40 rounded-xl p-2.5 flex items-center justify-between">
+                        <span class="text-slate-400">Múi giờ:</span>
+                        <span class="text-cyan-400 font-bold">GMT+7 (VN)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ô Hiển Thị Mã Key & Nút Nhận Key -->
+            <div class="mt-4 bg-[#130b26]/90 border border-cyan-500/30 rounded-2xl p-4 relative">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-xs font-bold text-slate-300 tracking-wide">MÃ KEY HÔM NAY:</span>
+                    <span id="keyStateBadge" class="text-[10px] text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded border border-amber-400/20">Chưa nhận</span>
+                </div>
+
+                <div class="bg-[#070314] border border-slate-700/80 rounded-xl p-3 text-center">
+                    <input 
+                        type="text" 
+                        id="keyInput" 
+                        value="••••••••••••••••" 
+                        readonly 
+                        class="w-full bg-transparent text-center font-mono font-bold text-base text-slate-500 tracking-wider focus:outline-none select-all"
+                    >
+                </div>
+
+                <!-- Nút Nhận Key Ban Đầu -->
+                <button 
+                    id="getKeyBtn" 
+                    onclick="handleGetKey()" 
+                    class="w-full mt-3 bg-gradient-to-r from-cyan-400 via-sky-500 to-pink-500 hover:opacity-95 active:scale-95 text-slate-950 font-black py-3 px-4 rounded-xl text-xs sm:text-sm transition-all duration-200 shadow-lg shadow-cyan-500/30 flex items-center justify-center gap-2 cursor-pointer"
+                >
+                    <svg class="w-4 h-4 text-slate-950" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 0121 9z"/>
+                    </svg>
+                    <span id="getKeyBtnText">NHẬN KEY NGAY</span>
+                </button>
+
+                <!-- Nút Sao Chép Sau Khi Đã Lấy Key -->
+                <button 
+                    id="copyKeyBtn" 
+                    onclick="handleCopyKey()" 
+                    class="hidden w-full mt-3 bg-emerald-600 hover:bg-emerald-500 active:scale-95 text-white font-black py-3 px-4 rounded-xl text-xs sm:text-sm transition-all duration-200 shadow-lg shadow-emerald-600/30 flex items-center justify-center gap-2 cursor-pointer"
+                >
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/>
+                    </svg>
+                    <span id="copyKeyBtnText">SAO CHÉP KEY VÀO BỘ NHỚ TẠM</span>
+                </button>
+            </div>
+
+            <!-- Khung Chứa Script Roblox -->
+            <div class="mt-4 bg-[#130b26]/90 border border-purple-900/40 rounded-2xl p-4">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-xs font-bold text-amber-400 flex items-center gap-1.5">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/>
+                        </svg>
+                        SCRIPT OMG HUB
+                    </span>
+                    <button onclick="handleCopyScript()" class="text-xs text-cyan-400 hover:text-cyan-300 font-bold underline transition-colors cursor-pointer">
+                        Sao chép Script
+                    </button>
+                </div>
+                <div class="bg-[#070314] border border-slate-800 rounded-xl p-3 text-xs font-mono text-cyan-300/90 break-all overflow-x-auto max-h-24">
+                    loadstring(game:HttpGet("https://raw.githubusercontent.com/ronnei/skibidi/refs/heads/main/omghub-stealanegg.lua"))()
+                </div>
+            </div>
+
+            <!-- Điều khiển Âm thanh SFX -->
+            <div class="mt-4 flex items-center justify-between text-xs text-slate-300 px-1">
+                <span class="flex items-center gap-1.5">
+                    🔊 Hiệu ứng âm thanh SFX:
+                </span>
+                <button 
+                    id="soundToggleBtn" 
+                    onclick="toggleSound()" 
+                    class="bg-[#070314] border border-cyan-500/40 text-cyan-300 font-bold px-3 py-1 rounded-lg hover:bg-cyan-500/10 transition-colors cursor-pointer"
+                >
+                    Bật 🟢
+                </button>
+            </div>
+
+            <!-- Toast Thông Báo Nổi -->
+            <div id="toast" class="opacity-0 translate-y-2 transition-all duration-300 mt-3 p-2.5 rounded-xl text-center text-xs font-semibold hidden"></div>
+
+            <!-- Footer -->
+            <div class="mt-5 pt-3 border-t border-slate-800/80 text-center">
+                <p class="text-xs text-slate-400">
+                    Nhập Key vào Script trong game Roblox để kích hoạt tự động!
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- JavaScript Xử Lý Toàn Diện: Token Bảo Vệ + Mã Hóa Đổi Key Ngày + Three.js 3D + SFX -->
+    <script>
+        // =========================================================================
+        // 1. KHÓA BẢO VỆ TỰ HỦY URL (CHỐNG RELOAD / LỊCH SỬ / BOOKMARK)
+        // =========================================================================
+        const SECRET_KEYWORD = "omg2026";
+        const currentUrl = window.location.href;
+        
+        const isPreviewEnv = !window.location.hostname || window.location.hostname.includes("localhost") || window.location.protocol === "about:";
+        const hasValidToken = isPreviewEnv || 
+                              currentUrl.includes("pass=" + SECRET_KEYWORD) || 
+                              currentUrl.includes("token=" + SECRET_KEYWORD) || 
+                              currentUrl.includes("#" + SECRET_KEYWORD);
+
+        if (!hasValidToken) {
+            document.body.innerHTML = `
+                <div style="background:#0a0516; color:#fff; height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; font-family:sans-serif; padding:20px;">
+                    <h1 style="color:#f43f5e; font-size:24px; margin-bottom:12px;">⚠️ TRUY CẬP BỊ TỪ CHỐI</h1>
+                    <p style="color:#94a3b8; max-width:400px; font-size:14px; line-height:1.5;">Liên kết đã hết hạn hoặc bạn đang vào từ Lịch sử / Bookmark.</p>
+                    <p style="color:#38bdf8; margin-top:10px; font-size:13px; font-weight:bold;">Vui lòng mở lại Roblox Script và bấm "LẤY LINK KEY" để vượt link!</p>
+                </div>
+            `;
+            throw new Error("Dừng script: Không có quyền truy cập.");
+        } else {
+            if (!isPreviewEnv) {
+                history.replaceState(null, "", window.location.pathname);
+            }
+        }
+
+        // =========================================================================
+        // 2. THUẬT TOÁN TÍNH KEY MÃ HÓA THEO NGÀY (RESET LÚC 00:00 GMT+7)
+        // =========================================================================
+        function generateDynamicKey() {
+            const now = new Date();
+            const vnTime = new Date(now.toLocaleString("en-US", { timeZone: "Asia/Ho_Chi_Minh" }));
+            
+            const day = vnTime.getDate();
+            const month = vnTime.getMonth() + 1;
+            const year = vnTime.getFullYear();
+      
+            // Công thức mã hóa đồng bộ chuẩn
+            const val1 = (day * 1337 + month * 919 + year * 31) % 65535;
+            const val2 = (day * 4099 + month * 7919 + year * 101) % 65535;
+
+            const hex1 = val1.toString(16).toUpperCase().padStart(4, '0');
+            const hex2 = val2.toString(16).toUpperCase().padStart(4, '0');
+
+            return `OMG-${hex1}-${hex2}`;
+        }
+
+        const SCRIPT_VALUE = `loadstring(game:HttpGet("https://raw.githubusercontent.com/ronnei/skibidi/refs/heads/main/omghub-stealanegg.lua"))()`;
+
+        // =========================================================================
+        // 3. HIỆU ỨNG ÂM THANH SFX (WEB AUDIO API)
+        // =========================================================================
+        let soundEnabled = true;
+        let audioCtx = null;
+
+        function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+        }
+
+        function playSFX(type) {
+            if (!soundEnabled) return;
+            initAudio();
+            if (!audioCtx) return;
+
+            const now = audioCtx.currentTime;
+
+            if (type === 'click') {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(520, now);
+                osc.frequency.exponentialRampToValueAtTime(1040, now + 0.06);
+                gain.gain.setValueAtTime(0.15, now);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.06);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start(now);
+                osc.stop(now + 0.06);
+            } 
+            else if (type === 'success') {
+                [523.25, 659.25, 1046.50].forEach((freq, idx) => {
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    const startTime = now + idx * 0.08;
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(freq, startTime);
+                    gain.gain.setValueAtTime(0.18, startTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.25);
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.start(startTime);
+                    osc.stop(startTime + 0.25);
+                });
+            }
+            else if (type === 'copy') {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(784, now);
+                osc.frequency.exponentialRampToValueAtTime(1568, now + 0.12);
+                gain.gain.setValueAtTime(0.15, now);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.12);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start(now);
+                osc.stop(now + 0.12);
+            }
+        }
+
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            const btn = document.getElementById("soundToggleBtn");
+            btn.innerText = soundEnabled ? "Bật 🟢" : "Tắt 🔴";
+            if (soundEnabled) playSFX('click');
+        }
+
+        // =========================================================================
+        // 4. HIỆU ỨNG 3D GRID & PARTICLE BẰNG THREE.JS
+        // =========================================================================
+        let scene, camera, renderer, gridFloor, gridCeiling, particleSystem;
+
+        function init3DBackground() {
+            const canvas = document.getElementById('webgl-canvas');
+            scene = new THREE.Scene();
+            scene.fog = new THREE.FogExp2(0x04020a, 0.075);
+
+            camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.set(0, 0, 5);
+
+            renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+            const gridGeo = new THREE.PlaneGeometry(60, 100, 40, 60);
+            const gridMat = new THREE.MeshBasicMaterial({
+                color: 0x8b5cf6,
+                wireframe: true,
+                transparent: true,
+                opacity: 0.22
+            });
+
+            gridFloor = new THREE.Mesh(gridGeo, gridMat);
+            gridFloor.rotation.x = -Math.PI / 2;
+            gridFloor.position.y = -3.5;
+            scene.add(gridFloor);
+
+            gridCeiling = new THREE.Mesh(gridGeo, new THREE.MeshBasicMaterial({
+                color: 0x00f0ff,
+                wireframe: true,
+                transparent: true,
+                opacity: 0.15
+            }));
+            gridCeiling.rotation.x = Math.PI / 2;
+            gridCeiling.position.y = 3.5;
+            scene.add(gridCeiling);
+
+            const pCount = 350;
+            const pGeo = new THREE.BufferGeometry();
+            const pPos = new Float32Array(pCount * 3);
+
+            for (let i = 0; i < pCount * 3; i += 3) {
+                pPos[i] = (Math.random() - 0.5) * 25;
+                pPos[i + 1] = (Math.random() - 0.5) * 15;
+                pPos[i + 2] = (Math.random() - 0.5) * 40;
+            }
+
+            pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
+            const pMat = new THREE.PointsMaterial({
+                size: 0.06,
+                color: 0xec4899,
+                transparent: true,
+                opacity: 0.85
+            });
+
+            particleSystem = new THREE.Points(pGeo, pMat);
+            scene.add(particleSystem);
+
+            animate3D();
+        }
+
+        function animate3D() {
+            requestAnimationFrame(animate3D);
+
+            if (gridFloor) {
+                gridFloor.position.z += 0.08;
+                if (gridFloor.position.z > 5) gridFloor.position.z = 0;
+            }
+            if (gridCeiling) {
+                gridCeiling.position.z += 0.08;
+                if (gridCeiling.position.z > 5) gridCeiling.position.z = 0;
+            }
+
+            if (particleSystem) {
+                const positions = particleSystem.geometry.attributes.position.array;
+                for (let i = 2; i < positions.length; i += 3) {
+                    positions[i] += 0.06;
+                    if (positions[i] > 10) positions[i] = -30;
+                }
+                particleSystem.geometry.attributes.position.needsUpdate = true;
+            }
+
+            renderer.render(scene, camera);
+        }
+
+        window.addEventListener('resize', () => {
+            if (!camera || !renderer) return;
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        const mainCard = document.getElementById("mainCard");
+        document.addEventListener("mousemove", (e) => {
+            const { clientX, clientY } = e;
+            const { innerWidth, innerHeight } = window;
+            const rotX = ((clientY / innerHeight) - 0.5) * -10;
+            const rotY = ((clientX / innerWidth) - 0.5) * 10;
+            mainCard.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+        });
+
+        // =========================================================================
+        // 5. XỬ LÝ NHẬN KEY VÀ SAO CHÉP
+        // =========================================================================
+        function showToast(msg, isSuccess = true) {
+            const toast = document.getElementById("toast");
+            toast.className = "opacity-0 translate-y-2 transition-all duration-300 mt-3 p-2.5 rounded-xl text-center text-xs font-semibold";
+            
+            if (isSuccess) {
+                toast.classList.add("bg-emerald-500/20", "text-emerald-300", "border", "border-emerald-500/30");
+            } else {
+                toast.classList.add("bg-rose-500/20", "text-rose-300", "border", "border-rose-500/30");
+            }
+
+            toast.innerText = msg;
+            toast.classList.remove("hidden");
+            
+            setTimeout(() => { toast.classList.remove("opacity-0", "translate-y-2"); }, 10);
+            setTimeout(() => {
+                toast.classList.add("opacity-0", "translate-y-2");
+                setTimeout(() => { toast.classList.add("hidden"); }, 300);
+            }, 3000);
+        }
+
+        function handleGetKey() {
+            playSFX('click');
+
+            const btn = document.getElementById("getKeyBtn");
+            const btnText = document.getElementById("getKeyBtnText");
+            const keyInput = document.getElementById("keyInput");
+            const badge = document.getElementById("keyStateBadge");
+            const copyKeyBtn = document.getElementById("copyKeyBtn");
+
+            btn.disabled = true;
+            btnText.innerText = "ĐANG TẠO KEY...";
+            btn.classList.add("opacity-75");
+
+            setTimeout(() => {
+                playSFX('success');
+
+                const generatedKey = generateDynamicKey();
+                keyInput.value = generatedKey;
+                keyInput.classList.remove("text-slate-500");
+                keyInput.classList.add("text-cyan-300", "neon-text-cyan");
+
+                btn.classList.add("hidden");
+                copyKeyBtn.classList.remove("hidden");
+
+                badge.innerText = "Đã lấy ✓";
+                badge.className = "text-[10px] text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/30 font-bold";
+
+                showToast("🎉 Đã nhận thành công Key OMG Hub hôm nay!", true);
+            }, 550);
+        }
+
+        function handleCopyKey() {
+            playSFX('copy');
+            const keyInput = document.getElementById("keyInput");
+            copyTextToClipboard(keyInput.value, () => {
+                showToast("✅ Đã sao chép Key vào bộ nhớ tạm!", true);
+                const btnText = document.getElementById("copyKeyBtnText");
+                btnText.innerText = "ĐÃ SAO CHÉP KEY! ✓";
+                setTimeout(() => { btnText.innerText = "SAO CHÉP KEY VÀO BỘ NHỚ TẠM"; }, 2000);
+            });
+        }
+
+        function handleCopyScript() {
+            playSFX('copy');
+            copyTextToClipboard(SCRIPT_VALUE, () => {
+                showToast("✅ Đã sao chép Script OMG Hub!", true);
+            });
+        }
+
+        function copyTextToClipboard(text, callback) {
+            const textarea = document.createElement("textarea");
+            textarea.value = text;
+            textarea.style.position = "fixed";
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                if (callback) callback();
+            } catch (err) {
+                showToast("Lỗi sao chép tự động!", false);
+            } finally {
+                document.body.removeChild(textarea);
+            }
+        }
+
+        window.onload = () => {
+            init3DBackground();
+        };
+    </script>
+</body>
+</html>
