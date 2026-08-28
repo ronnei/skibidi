@@ -1,5 +1,5 @@
 -- =========================================================================
---   ★ HỆ THỐNG GETKEY OMG HUB & MENU BLOX TỔNG HỢP (CYBER NEON EDITION) ★
+--       ★ HỆ THỐNG GETKEY OMG HUB (TỰ ĐỘNG CHẠY SCRIPT GỐC) ★
 -- =========================================================================
 
 local TweenService = game:GetService("TweenService")
@@ -10,7 +10,6 @@ local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
 local KeyUrl = "https://link4m.org/TnmLxjP"
 local TutorialUrl = "https://cbrowse.github.io/browse/getkey.html"
-local TargetScriptUrl = "https://raw.githubusercontent.com/ronnei/skibidi/refs/heads/main/omghub-stealanegg.lua"
 
 -- Thuật toán sinh Key mã hóa theo ngày (Đồng bộ 100% với Web JS)
 local function GenerateKey(offsetDays)
@@ -32,6 +31,18 @@ local function GenerateKey(offsetDays)
 end
 
 local TodayKey = GenerateKey(0)
+
+-- Khởi chạy trực tiếp Script chính Omgshit Loader
+local function LaunchMainScript()
+    task.spawn(function()
+        local success, result = pcall(function()
+            return loadstring(game:HttpGet("https://raw.githubusercontent.com/Omgshit/Scripts/main/MainLoader.lua"))()
+        end)
+        if not success then
+            warn("[OMG Hub Error]:", result)
+        end
+    end)
+end
 
 -- Hàm sao chép an toàn
 local function SetClipboardSafe(text)
@@ -56,195 +67,7 @@ local function PlayBounce(btn)
     t1.Completed:Connect(function() t2:Play() end)
 end
 
--- =========================================================================
---             1. MENU CHÍNH SAU KHI NHẬP KEY (CYBER OCEAN BLUE)
--- =========================================================================
-local function OpenMainHubMenu()
-    if CoreGui:FindFirstChild("OMGHub_MainBloxUI") then
-        CoreGui.OMGHub_MainBloxUI:Destroy()
-    end
-
-    local MainGui = Instance.new("ScreenGui")
-    MainGui.Name = "OMGHub_MainBloxUI"
-    MainGui.ResetOnSpawn = false
-    pcall(function() MainGui.Parent = CoreGui end)
-    if not MainGui.Parent then MainGui.Parent = LocalPlayer:WaitForChild("PlayerGui") end
-
-    -- Khung Menu Phong Cách Cyber Ocean Sky
-    local HubFrame = Instance.new("Frame")
-    HubFrame.Name = "HubFrame"
-    HubFrame.AnchorPoint = Vector2.new(0.5, 0.5)
-    HubFrame.Size = UDim2.new(0, 420, 0, 290)
-    HubFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
-    HubFrame.BackgroundColor3 = Color3.fromRGB(5, 14, 28)
-    HubFrame.BorderSizePixel = 0
-    HubFrame.Active = true
-    HubFrame.Draggable = true
-    HubFrame.ClipsDescendants = true
-    HubFrame.Parent = MainGui
-
-    local HubCorner = Instance.new("UICorner")
-    HubCorner.CornerRadius = UDim.new(0, 16)
-    HubCorner.Parent = HubFrame
-
-    local HubStroke = Instance.new("UIStroke")
-    HubStroke.Thickness = 2
-    HubStroke.Color = Color3.fromRGB(0, 225, 255)
-    HubStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-    HubStroke.Parent = HubFrame
-
-    -- Header Menu
-    local HeaderBar = Instance.new("Frame")
-    HeaderBar.Size = UDim2.new(1, 0, 0, 44)
-    HeaderBar.BackgroundColor3 = Color3.fromRGB(10, 26, 48)
-    HeaderBar.BorderSizePixel = 0
-    HeaderBar.Parent = HubFrame
-
-    local HeaderCorner = Instance.new("UICorner")
-    HeaderCorner.CornerRadius = UDim.new(0, 16)
-    HeaderCorner.Parent = HeaderBar
-
-    local HubTitle = Instance.new("TextLabel")
-    HubTitle.Size = UDim2.new(1, -60, 1, 0)
-    HubTitle.Position = UDim2.new(0, 16, 0, 0)
-    HubTitle.BackgroundTransparency = 1
-    HubTitle.Text = "★ OMG HUB - MENU BLOX SCRIPT TỔNG HỢP ★"
-    HubTitle.TextColor3 = Color3.fromRGB(0, 230, 255)
-    HubTitle.TextSize = 12.5
-    HubTitle.Font = Enum.Font.GothamBlack
-    HubTitle.TextXAlignment = Enum.TextXAlignment.Left
-    HubTitle.Parent = HeaderBar
-
-    local CloseBtn = Instance.new("TextButton")
-    CloseBtn.Size = UDim2.new(0, 28, 0, 28)
-    CloseBtn.Position = UDim2.new(1, -36, 0, 8)
-    CloseBtn.BackgroundColor3 = Color3.fromRGB(20, 38, 65)
-    CloseBtn.Text = "✕"
-    CloseBtn.TextColor3 = Color3.fromRGB(255, 90, 90)
-    CloseBtn.TextSize = 13
-    CloseBtn.Font = Enum.Font.GothamBold
-    CloseBtn.Parent = HeaderBar
-
-    local CloseCorner = Instance.new("UICorner")
-    CloseCorner.CornerRadius = UDim.new(0, 6)
-    CloseCorner.Parent = CloseBtn
-    CloseBtn.MouseButton1Click:Connect(function() MainGui:Destroy() end)
-
-    -- Status Bar
-    local StatusCard = Instance.new("Frame")
-    StatusCard.Size = UDim2.new(1, -30, 0, 32)
-    StatusCard.Position = UDim2.new(0, 15, 0, 54)
-    StatusCard.BackgroundColor3 = Color3.fromRGB(8, 22, 40)
-    StatusCard.Parent = HubFrame
-
-    local StatusCardCorner = Instance.new("UICorner")
-    StatusCardCorner.CornerRadius = UDim.new(0, 8)
-    StatusCardCorner.Parent = StatusCard
-
-    local StatusText = Instance.new("TextLabel")
-    StatusText.Size = UDim2.new(1, -20, 1, 0)
-    StatusText.Position = UDim2.new(0, 10, 0, 0)
-    StatusText.BackgroundTransparency = 1
-    StatusText.Text = "Trạng thái: Đã Xác Thực Key VIP (OMG Hub Official)"
-    StatusText.TextColor3 = Color3.fromRGB(56, 189, 248)
-    StatusText.TextSize = 10.5
-    StatusText.Font = Enum.Font.GothamBold
-    StatusText.TextXAlignment = Enum.TextXAlignment.Left
-    StatusText.Parent = StatusCard
-
-    -- Card Kích Hoạt Script
-    local ScriptCard = Instance.new("Frame")
-    ScriptCard.Size = UDim2.new(1, -30, 0, 126)
-    ScriptCard.Position = UDim2.new(0, 15, 0, 94)
-    ScriptCard.BackgroundColor3 = Color3.fromRGB(8, 20, 36)
-    ScriptCard.Parent = HubFrame
-
-    local ScriptCardCorner = Instance.new("UICorner")
-    ScriptCardCorner.CornerRadius = UDim.new(0, 10)
-    ScriptCardCorner.Parent = ScriptCard
-
-    local ScriptStroke = Instance.new("UIStroke")
-    ScriptStroke.Color = Color3.fromRGB(0, 180, 255)
-    ScriptStroke.Thickness = 1
-    ScriptStroke.Parent = ScriptCard
-
-    local ScriptName = Instance.new("TextLabel")
-    ScriptName.Size = UDim2.new(1, -20, 0, 24)
-    ScriptName.Position = UDim2.new(0, 10, 0, 6)
-    ScriptName.BackgroundTransparency = 1
-    ScriptName.Text = "⚡ OMG HUB - STEAL AN EGG SCRIPT"
-    ScriptName.TextColor3 = Color3.fromRGB(0, 230, 255)
-    ScriptName.TextSize = 11.5
-    ScriptName.Font = Enum.Font.GothamBlack
-    ScriptName.TextXAlignment = Enum.TextXAlignment.Left
-    ScriptName.Parent = ScriptCard
-
-    local ScriptDesc = Instance.new("TextLabel")
-    ScriptDesc.Size = UDim2.new(1, -20, 0, 32)
-    ScriptDesc.Position = UDim2.new(0, 10, 0, 28)
-    ScriptDesc.BackgroundTransparency = 1
-    ScriptDesc.Text = "Bấm nút bên dưới để nạp và khởi chạy trực tiếp Script OMG Hub vào game."
-    ScriptDesc.TextColor3 = Color3.fromRGB(150, 190, 225)
-    ScriptDesc.TextSize = 9.5
-    ScriptDesc.Font = Enum.Font.GothamMedium
-    ScriptDesc.TextWrapped = true
-    ScriptDesc.TextXAlignment = Enum.TextXAlignment.Left
-    ScriptDesc.Parent = ScriptCard
-
-    local ExecuteBtn = Instance.new("TextButton")
-    ExecuteBtn.Size = UDim2.new(1, -20, 0, 38)
-    ExecuteBtn.Position = UDim2.new(0, 10, 0, 74)
-    ExecuteBtn.BackgroundColor3 = Color3.fromRGB(0, 215, 255)
-    ExecuteBtn.Text = "▶ KHỞI CHẠY SCRIPT NGAY"
-    ExecuteBtn.TextColor3 = Color3.fromRGB(5, 15, 30)
-    ExecuteBtn.TextSize = 12
-    ExecuteBtn.Font = Enum.Font.GothamBlack
-    ExecuteBtn.AutoButtonColor = false
-    ExecuteBtn.Parent = ScriptCard
-
-    local ExecCorner = Instance.new("UICorner")
-    ExecCorner.CornerRadius = UDim.new(0, 8)
-    ExecCorner.Parent = ExecuteBtn
-
-    local HubStatus = Instance.new("TextLabel")
-    HubStatus.Size = UDim2.new(1, -30, 0, 40)
-    HubStatus.Position = UDim2.new(0, 15, 0, 230)
-    HubStatus.BackgroundTransparency = 1
-    HubStatus.Text = "Hệ thống sẵn sàng • OMG Hub System"
-    HubStatus.TextColor3 = Color3.fromRGB(100, 150, 190)
-    HubStatus.TextSize = 10
-    HubStatus.Font = Enum.Font.GothamBold
-    HubStatus.Parent = HubFrame
-
-    ExecuteBtn.MouseButton1Click:Connect(function()
-        PlayBounce(ExecuteBtn)
-        ExecuteBtn.Text = "⏳ Đang tải Script..."
-        HubStatus.TextColor3 = Color3.fromRGB(0, 230, 255)
-        HubStatus.Text = "Đang kết nối tới máy chủ Script..."
-        
-        task.spawn(function()
-            local success, result = pcall(function()
-                return loadstring(game:HttpGet(TargetScriptUrl))()
-            end)
-            if success then
-                ExecuteBtn.Text = "✔ ĐÃ KÍCH HOẠT THÀNH CÔNG"
-                ExecuteBtn.BackgroundColor3 = Color3.fromRGB(34, 197, 94)
-                HubStatus.TextColor3 = Color3.fromRGB(74, 222, 128)
-                HubStatus.Text = "✔ Script đã được inject thành công vào Roblox!"
-            else
-                ExecuteBtn.Text = "✖ LỖI KẾT NỐI SCRIPT"
-                ExecuteBtn.BackgroundColor3 = Color3.fromRGB(239, 68, 68)
-                HubStatus.TextColor3 = Color3.fromRGB(248, 113, 113)
-                HubStatus.Text = "Không thể tải Script, vui lòng thử lại sau."
-                warn("[OMG Hub Error]:", result)
-            end
-        end)
-    end)
-end
-
--- =========================================================================
---             2. GIAO DIỆN GETKEY OMG HUB (KHUNG CẦU VỒNG NEON)
--- =========================================================================
+-- Dọn dẹp UI cũ nếu có
 if CoreGui:FindFirstChild("OMGHub_GetKeyUI") then
     CoreGui.OMGHub_GetKeyUI:Destroy()
 end
@@ -326,7 +149,7 @@ ButtonsRow.Position = UDim2.new(0, 15, 0, 76)
 ButtonsRow.BackgroundTransparency = 1
 ButtonsRow.Parent = MainFrame
 
--- Nút GET KEY: #00F0FF | rgb(0, 240, 255) (Xanh Cyan Neon - chữ đen)
+-- Nút GET KEY: #00F0FF (Xanh Cyan Neon - chữ đen)
 local GetKeyBtn = Instance.new("TextButton")
 GetKeyBtn.Size = UDim2.new(0.5, -5, 1, 0)
 GetKeyBtn.Position = UDim2.new(0, 0, 0, 0)
@@ -357,7 +180,7 @@ local CheckCorner = Instance.new("UICorner")
 CheckCorner.CornerRadius = UDim.new(0, 8)
 CheckCorner.Parent = CheckKeyBtn
 
--- Hàng nút 2: Nút Video Hướng Dẫn
+-- Hàng nút 2: Nút Video Hướng Dẫn Lấy Key
 local TutorialBtn = Instance.new("TextButton")
 TutorialBtn.Size = UDim2.new(1, -30, 0, 30)
 TutorialBtn.Position = UDim2.new(0, 15, 0, 116)
@@ -378,7 +201,7 @@ TutorialStroke.Color = Color3.fromRGB(0, 160, 230)
 TutorialStroke.Thickness = 1
 TutorialStroke.Parent = TutorialBtn
 
--- Banner trạng thái hiển thị thông báo
+-- Banner trạng thái
 local StatusBanner = Instance.new("Frame")
 StatusBanner.Size = UDim2.new(1, -30, 0, 26)
 StatusBanner.Position = UDim2.new(0, 15, 0, 152)
@@ -420,7 +243,7 @@ local NoteLabel = Instance.new("TextLabel")
 NoteLabel.Size = UDim2.new(1, -16, 1, -10)
 NoteLabel.Position = UDim2.new(0, 8, 0, 6)
 NoteLabel.BackgroundTransparency = 1
-NoteLabel.TextColor3 = Color3.fromRGB(246, 173, 85) -- Vàng cam / vàng đỏ nhẹ
+NoteLabel.TextColor3 = Color3.fromRGB(246, 173, 85)
 NoteLabel.TextSize = 10
 NoteLabel.Font = Enum.Font.GothamMedium
 NoteLabel.TextWrapped = true
@@ -463,7 +286,7 @@ TutorialBtn.MouseButton1Click:Connect(function()
     end)
 end)
 
--- Bấm Kiểm Tra Key -> Mở Menu Script Blox
+-- Bấm Kiểm Tra Key -> Tự động khởi chạy Script gốc trực tiếp
 local isChecking = false
 CheckKeyBtn.MouseButton1Click:Connect(function()
     if isChecking then return end
@@ -481,9 +304,12 @@ CheckKeyBtn.MouseButton1Click:Connect(function()
     if enteredKey == TodayKey then
         StatusBanner.BackgroundColor3 = Color3.fromRGB(15, 60, 30)
         StatusMsg.TextColor3 = Color3.fromRGB(80, 255, 140)
-        StatusMsg.Text = "✔ Key hợp lệ! Đang mở Menu OMG Hub..."
+        StatusMsg.Text = "✔ Key hợp lệ! Đang khởi chạy OMG Hub..."
         CheckKeyBtn.Text = "✔ THÀNH CÔNG"
         CheckKeyBtn.BackgroundColor3 = Color3.fromRGB(40, 150, 70)
+        
+        -- Kích hoạt script loader gốc trực tiếp
+        LaunchMainScript()
         
         task.wait(0.4)
         TweenService:Create(MainFrame, TweenInfo.new(0.25, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {
@@ -493,9 +319,6 @@ CheckKeyBtn.MouseButton1Click:Connect(function()
         
         task.wait(0.25)
         ScreenGui:Destroy()
-        
-        -- Mở Menu Script Blox
-        OpenMainHubMenu()
     else
         isChecking = false
         CheckKeyBtn.Text = "✔ KIỂM TRA KEY"
