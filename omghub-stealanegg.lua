@@ -1,9 +1,10 @@
 -- =========================================================================
---   ★ HỆ THỐNG GETKEY OMG HUB - BẢN CỐ ĐỊNH & CHỌN NGÔN NGỮ QUỐC KỲ ★
+--   ★ HỆ THỐNG GETKEY OMG HUB - THỜI HẠN 24H & THÔNG BÁO THỜI GIAN CÒN LẠI ★
 -- =========================================================================
 
 local TweenService = game:GetService("TweenService")
 local RunService = game:GetService("RunService")
+local HttpService = game:GetService("HttpService")
 local CoreGui = game:GetService("CoreGui")
 local Players = game:GetService("Players")
 
@@ -11,6 +12,7 @@ local LocalPlayer = Players.LocalPlayer
 local KeyUrl = "https://link4m.org/TnmLxjP"
 local TutorialUrl = "https://cbrowse.github.io/browse/getkey.html"
 local TargetScriptUrl = "https://raw.githubusercontent.com/Omgshit/Scripts/main/MainLoader.lua"
+local KeyFileName = "OMGHub_KeyData.json"
 
 -- Từ điển 2 ngôn ngữ: Tiếng Việt & English
 local Languages = {
@@ -23,7 +25,7 @@ local Languages = {
         GetKey = "🔗 LẤY LINK KEY",
         CheckKey = "✔ KIỂM TRA KEY",
         Tutorial = "▶ Hướng Dẫn Lấy Key | Video Tutorial",
-        StatusDaily = "⚡ Key mã hóa tự động thay đổi sau 00:00 hàng ngày",
+        StatusDaily = "⚡ Thời hạn Key: 24 tiếng tính từ lúc kích hoạt",
         CopiedLink = "📋 Đã sao chép link! Dán lên trình duyệt để getkey.",
         CopiedVideo = "🎬 Đã sao chép link video hướng dẫn!",
         BtnCopied = "✔ ĐÃ SAO CHÉP",
@@ -32,7 +34,7 @@ local Languages = {
         Success = "✔ Key hợp lệ! Đang khởi chạy OMG Hub...",
         SuccessBtn = "✔ THÀNH CÔNG",
         Error = "✖ Key không hợp lệ hoặc đã hết hạn! Vui lòng vượt link lấy Key mới.",
-        Note = "📌 Lưu ý quan trọng:\n• script no key đã hết hạn.nên ronnei xin phép mọi người thêm key vào nhó 🥰\n• Việc lấy Key chỉ mất 1-2 phút qua link vượt. Chúc các bạn chơi game vui vẻ!"
+        Note = "📌 Lưu ý quan trọng:\n• Mỗi Key có giá trị sử dụng trọn vẹn 24 tiếng trên máy này 🥰\n• Lấy Key chỉ mất 1-2 phút qua link vượt. Chúc các bạn chơi game vui vẻ!"
     },
     EN = {
         LangBtnText = "🇺🇸 EN ▾",
@@ -43,7 +45,7 @@ local Languages = {
         GetKey = "🔗 GET KEY LINK",
         CheckKey = "✔ CHECK KEY",
         Tutorial = "▶ How to Get Key | Video Tutorial",
-        StatusDaily = "⚡ Dynamic Key resets automatically daily after 00:00",
+        StatusDaily = "⚡ Key Validity: 24 hours from activation",
         CopiedLink = "📋 Copied! Paste link into browser to get key.",
         CopiedVideo = "🎬 Tutorial video link copied!",
         BtnCopied = "✔ COPIED",
@@ -52,7 +54,7 @@ local Languages = {
         Success = "✔ Valid Key! Launching OMG Hub...",
         SuccessBtn = "✔ SUCCESS",
         Error = "✖ Invalid or expired Key! Please bypass link for a new Key.",
-        Note = "📌 Important Notice:\n• The keyless script expired, so key system is now enabled 🥰\n• Getting the key takes only 1-2 minutes. Thank you for your support and enjoy the game!"
+        Note = "📌 Important Notice:\n• Each Key is valid for a full 24 hours on this device 🥰\n• Getting key takes only 1-2 minutes. Enjoy your game!"
     }
 }
 
@@ -79,6 +81,7 @@ end
 
 local TodayKey = GenerateKey(0)
 
+-- Hàm khởi chạy Script chính
 local function LaunchMainScript()
     task.spawn(function()
         local success, result = pcall(function()
@@ -88,6 +91,146 @@ local function LaunchMainScript()
             warn("[OMG Hub Error]:", result)
         end
     end)
+end
+
+-- Hàm định dạng thời gian còn lại (giờ, phút, giây)
+local function FormatRemainingTime(seconds)
+    local hours = math.floor(seconds / 3600)
+    local mins = math.floor((seconds % 3600) / 60)
+    local secs = seconds % 60
+    if hours > 0 then
+        return string.format("%d giờ %d phút", hours, mins)
+    elseif mins > 0 then
+        return string.format("%d phút %d giây", mins, secs)
+    else
+        return string.format("%d giây", secs)
+    end
+end
+
+-- Bảng thông báo nổi 5 giây hiển thị thời gian Key còn lại
+local function ShowRemainingToast(secondsLeft)
+    local ToastGui = Instance.new("ScreenGui")
+    ToastGui.Name = "OMGHub_KeyRemainingToast"
+    ToastGui.ResetOnSpawn = false
+    pcall(function() ToastGui.Parent = CoreGui end)
+    if not ToastGui.Parent then ToastGui.Parent = LocalPlayer:WaitForChild("PlayerGui") end
+
+    local ToastFrame = Instance.new("Frame")
+    ToastFrame.Size = UDim2.new(0, 360, 0, 72)
+    ToastFrame.Position = UDim2.new(0.5, -180, 0, -100)
+    ToastFrame.BackgroundColor3 = Color3.fromRGB(11, 8, 19)
+    ToastFrame.BorderSizePixel = 0
+    ToastFrame.Parent = ToastGui
+
+    local Corner = Instance.new("UICorner")
+    Corner.CornerRadius = UDim.new(0, 12)
+    Corner.Parent = ToastFrame
+
+    local Stroke = Instance.new("UIStroke")
+    Stroke.Thickness = 1.8
+    Stroke.Color = Color3.fromRGB(0, 240, 255)
+    Stroke.Parent = ToastFrame
+
+    local Icon = Instance.new("TextLabel")
+    Icon.Size = UDim2.new(0, 42, 1, -8)
+    Icon.Position = UDim2.new(0, 4, 0, 0)
+    Icon.BackgroundTransparency = 1
+    Icon.Text = "⏳"
+    Icon.TextSize = 22
+    Icon.Parent = ToastFrame
+
+    local Title = Instance.new("TextLabel")
+    Title.Size = UDim2.new(1, -55, 0, 20)
+    Title.Position = UDim2.new(0, 46, 0, 10)
+    Title.BackgroundTransparency = 1
+    Title.Text = "★ OMG HUB - KEY CÒN HIỆU LỰC ★"
+    Title.TextColor3 = Color3.fromRGB(0, 240, 255)
+    Title.TextSize = 11.5
+    Title.Font = Enum.Font.GothamBlack
+    Title.TextXAlignment = Enum.TextXAlignment.Left
+    Title.Parent = ToastFrame
+
+    local Msg = Instance.new("TextLabel")
+    Msg.Size = UDim2.new(1, -55, 0, 20)
+    Msg.Position = UDim2.new(0, 46, 0, 30)
+    Msg.BackgroundTransparency = 1
+    Msg.Text = "Thời gian còn lại: " .. FormatRemainingTime(secondsLeft)
+    Msg.TextColor3 = Color3.fromRGB(74, 222, 128)
+    Msg.TextSize = 11
+    Msg.Font = Enum.Font.GothamBold
+    Msg.TextXAlignment = Enum.TextXAlignment.Left
+    Msg.Parent = ToastFrame
+
+    local BarBg = Instance.new("Frame")
+    BarBg.Size = UDim2.new(1, -16, 0, 3)
+    BarBg.Position = UDim2.new(0, 8, 1, -6)
+    BarBg.BackgroundColor3 = Color3.fromRGB(24, 18, 38)
+    BarBg.BorderSizePixel = 0
+    BarBg.Parent = ToastFrame
+
+    local Bar = Instance.new("Frame")
+    Bar.Size = UDim2.new(1, 0, 1, 0)
+    Bar.BackgroundColor3 = Color3.fromRGB(0, 240, 255)
+    Bar.BorderSizePixel = 0
+    Bar.Parent = BarBg
+
+    TweenService:Create(ToastFrame, TweenInfo.new(0.35, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {
+        Position = UDim2.new(0.5, -180, 0, 25)
+    }):Play()
+
+    TweenService:Create(Bar, TweenInfo.new(5, Enum.EasingStyle.Linear), {
+        Size = UDim2.new(0, 0, 1, 0)
+    }):Play()
+
+    task.delay(5, function()
+        local t = TweenService:Create(ToastFrame, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {
+            Position = UDim2.new(0.5, -180, 0, -100),
+            BackgroundTransparency = 1
+        })
+        t:Play()
+        t.Completed:Connect(function()
+            ToastGui:Destroy()
+        end)
+    end)
+end
+
+-- Kiểm tra thời gian còn lại của Key 24h
+local function GetKeyRemainingTime()
+    if isfile and readfile and isfile(KeyFileName) then
+        local success, content = pcall(readfile, KeyFileName)
+        if success and content then
+            local decodeSuccess, data = pcall(function()
+                return HttpService:JSONDecode(content)
+            end)
+            if decodeSuccess and type(data) == "table" and data.ExpireTimestamp then
+                local timeLeft = data.ExpireTimestamp - os.time()
+                if timeLeft > 0 then
+                    return timeLeft
+                end
+            end
+        end
+    end
+    return nil
+end
+
+-- Lưu mốc 24 tiếng kể từ lúc nhập
+local function Save24hKey()
+    if writefile then
+        local data = {
+            ExpireTimestamp = os.time() + 86400
+        }
+        pcall(function()
+            writefile(KeyFileName, HttpService:JSONEncode(data))
+        end)
+    end
+end
+
+-- Nếu còn hạn 24h: Hiện thông báo 5 giây & Chạy thẳng script game
+local remainingTime = GetKeyRemainingTime()
+if remainingTime and remainingTime > 0 then
+    ShowRemainingToast(remainingTime)
+    LaunchMainScript()
+    return
 end
 
 local function SetClipboardSafe(text)
@@ -124,7 +267,7 @@ ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 pcall(function() ScreenGui.Parent = CoreGui end)
 if not ScreenGui.Parent then ScreenGui.Parent = LocalPlayer:WaitForChild("PlayerGui") end
 
--- Khung chính Cố định vị trí
+-- Khung chính cố định (Draggable = false)
 local MainFrame = Instance.new("Frame")
 MainFrame.Name = "MainFrame"
 MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
@@ -183,7 +326,7 @@ SubTitleLabel.Font = Enum.Font.GothamMedium
 SubTitleLabel.TextXAlignment = Enum.TextXAlignment.Left
 SubTitleLabel.Parent = HeaderBar
 
--- Nút mở Bảng Chọn Ngôn Ngữ (Hiển thị Quốc kỳ)
+-- Nút mở Bảng Chọn Ngôn Ngữ
 local OpenLangBtn = Instance.new("TextButton")
 OpenLangBtn.Size = UDim2.new(0, 100, 0, 28)
 OpenLangBtn.Position = UDim2.new(1, -100, 0, 3)
@@ -572,12 +715,16 @@ CheckKeyBtn.MouseButton1Click:Connect(function()
     local enteredKey = string.gsub(InputBox.Text, "%s+", "")
     
     if enteredKey == TodayKey then
+        -- Lưu mốc thời hạn 24h vào file máy
+        Save24hKey()
+        
         StatusBanner.BackgroundColor3 = Color3.fromRGB(15, 60, 30)
         StatusMsg.TextColor3 = Color3.fromRGB(80, 255, 140)
         StatusMsg.Text = Languages[CurrentLang].Success
         CheckKeyBtn.Text = Languages[CurrentLang].SuccessBtn
         CheckKeyBtn.BackgroundColor3 = Color3.fromRGB(40, 150, 70)
         
+        -- Kích hoạt trực tiếp script gốc
         LaunchMainScript()
         
         task.wait(0.4)
