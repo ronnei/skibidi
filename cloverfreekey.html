@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Clover Hub - Hệ Thống Nhận Key Tự Động</title>
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@600;700;800&display=swap" rel="stylesheet">
@@ -47,6 +48,47 @@
         .glow-1 { top: -60px; left: -60px; background: #00F0FF; }
         .glow-2 { bottom: -60px; right: -60px; background: #FF0080; }
 
+        /* Màn Hình Từ Chối Truy Cập (Anti-History Screen) */
+        .denied-container {
+            width: 100%;
+            max-width: 420px;
+            text-align: center;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 20;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .denied-title {
+            color: #F43F5E;
+            font-size: 20px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 16px;
+            letter-spacing: -0.3px;
+        }
+
+        .denied-desc {
+            color: #94A3B8;
+            font-size: 13.5px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .denied-action {
+            color: #38BDF8;
+            font-size: 13.5px;
+            font-weight: 700;
+            line-height: 1.6;
+        }
+
         /* Main Hub Card */
         .hub-card {
             width: 100%;
@@ -71,7 +113,11 @@
             }
         }
 
-        /* Gradient Glowing Border */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
         .hub-card::before {
             content: '';
             position: absolute;
@@ -430,16 +476,27 @@
     <div class="ambient-glow glow-1"></div>
     <div class="ambient-glow glow-2"></div>
 
-    <div class="hub-card">
+    <!-- MÀN HÌNH 1: TỪ CHỐI TRUY CẬP (Khi reload hoặc vào từ lịch sử) -->
+    <div class="denied-container" id="accessDeniedScreen" style="display: none;">
+        <h1 class="denied-title">⚠️ TRUY CẬP BỊ TỪ CHỐI</h1>
+        <p class="denied-desc">Liên kết đã hết hạn hoặc bạn đang vào từ Lịch sử / Bookmark.</p>
+        <p class="denied-action">Vui lòng mở lại Roblox Script và bấm "LẤY LINK KEY" để vượt link!</p>
+    </div>
+
+    <!-- MÀN HÌNH 2: GIAO DIỆN NHẬN KEY (Chỉ hiện khi vào từ link rút gọn hợp lệ) -->
+    <div class="hub-card" id="mainHubScreen" style="display: none;">
+        <!-- Logo Icon -->
         <div class="logo-wrapper">
             <div class="logo-box">🎮</div>
         </div>
 
+        <!-- Header -->
         <div class="hub-header">
             <div class="hub-title">Clover Hub</div>
             <div class="hub-subtitle">script : cloverhub</div>
         </div>
 
+        <!-- Trạng Thái Key -->
         <div class="status-row">
             <div class="status-label">🔑 Trạng Thái Key:</div>
             <div class="status-badge">
@@ -448,6 +505,7 @@
             </div>
         </div>
 
+        <!-- Đổi Key & Múi Giờ -->
         <div class="grid-info">
             <div class="info-card">
                 <span class="label">Đổi Key:</span>
@@ -459,6 +517,7 @@
             </div>
         </div>
 
+        <!-- Phần Mã Key Hôm Nay -->
         <div class="key-section">
             <div class="key-header">
                 <span class="key-title">MÃ KEY HÔM NAY:</span>
@@ -475,6 +534,7 @@
             </button>
         </div>
 
+        <!-- Phần Script Loader -->
         <div class="script-section">
             <div class="script-header">
                 <span class="script-title">⚡ SCRIPT CLOVER HUB</span>
@@ -485,6 +545,7 @@
             </div>
         </div>
 
+        <!-- Cài Đặt SFX Âm Thanh -->
         <div class="sfx-row">
             <div class="sfx-label">🔔 Hiệu ứng âm thanh SFX:</div>
             <button class="sfx-toggle-btn active" id="sfxToggle" onclick="toggleSFX()">
@@ -492,16 +553,44 @@
             </button>
         </div>
 
+        <!-- Footer Ghi Chú -->
         <div class="footer-note">
             Nhập Key vào Script trong game để kích hoạt tự động!
         </div>
     </div>
 
+    <!-- Toast Popup Thông Báo Nổi -->
     <div class="toast-notification" id="toast">
         <span id="toastIcon">🎉</span>
         <span id="toastMsg">Đã nhận thành công Key Clover Hub hôm nay!</span>
     </div>
         <script>
+        // ==========================================
+        // 1. KIỂM TRA BẢO MẬT & CHẶN LỊCH SỬ / RELOAD
+        // ==========================================
+        const VALID_PASSWORDS = ["clover2026", "omg2026"];
+        const urlParams = new URLSearchParams(window.location.search);
+        const pass = urlParams.get('pass');
+
+        const navEntry = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+        const isReload = navEntry ? (navEntry.type === 'reload') : (performance.navigation && performance.navigation.type === 1);
+
+        if (!pass || !VALID_PASSWORDS.includes(pass) || isReload) {
+            // Không có pass, sai pass hoặc vừa bị tải lại trang -> Hiện cảnh báo từ chối
+            document.getElementById('accessDeniedScreen').style.display = 'flex';
+            document.getElementById('mainHubScreen').style.display = 'none';
+            window.history.replaceState({}, document.title, window.location.pathname);
+        } else {
+            // Hợp lệ -> Cho vào nhận Key
+            document.getElementById('mainHubScreen').style.display = 'block';
+            document.getElementById('accessDeniedScreen').style.display = 'none';
+            // Xóa pass khỏi URL ngay lập tức để không lưu vào lịch sử
+            window.history.replaceState({}, document.title, window.location.pathname);
+        }
+
+        // ==========================================
+        // 2. HIỆU ỨNG ÂM THANH SFX (WEB AUDIO API)
+        // ==========================================
         let isKeyUnlocked = false;
         let generatedKey = "";
         let isSfxEnabled = true;
@@ -543,18 +632,16 @@
                     osc.stop(now + 0.25);
                 } else if (type === 'success') {
                     osc.type = 'sine';
-                    osc.frequency.setValueAtTime(523.25, now);       // C5
-                    osc.frequency.setValueAtTime(659.25, now + 0.08); // E5
-                    osc.frequency.setValueAtTime(783.99, now + 0.16); // G5
-                    osc.frequency.setValueAtTime(1046.50, now + 0.24);// C6
+                    osc.frequency.setValueAtTime(523.25, now);
+                    osc.frequency.setValueAtTime(659.25, now + 0.08);
+                    osc.frequency.setValueAtTime(783.99, now + 0.16);
+                    osc.frequency.setValueAtTime(1046.50, now + 0.24);
                     gain.gain.setValueAtTime(0.25, now);
                     gain.gain.linearRampToValueAtTime(0, now + 0.38);
                     osc.start(now);
                     osc.stop(now + 0.38);
                 }
-            } catch (e) {
-                console.log("Audio Error:", e);
-            }
+            } catch (e) {}
         }
 
         function toggleSFX() {
@@ -571,6 +658,9 @@
             }
         }
 
+        // ==========================================
+        // 3. THUẬT TOÁN ĐỒNG BỘ KEY (GMT+7)
+        // ==========================================
         function getVietnamDate() {
             const now = new Date();
             const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
@@ -596,9 +686,7 @@
 
         function copyToClipboard(text) {
             if (navigator.clipboard && window.isSecureContext) {
-                return navigator.clipboard.writeText(text).catch(() => {
-                    fallbackCopyText(text);
-                });
+                return navigator.clipboard.writeText(text).catch(() => fallbackCopyText(text));
             } else {
                 fallbackCopyText(text);
                 return Promise.resolve();
@@ -614,11 +702,7 @@
             document.body.appendChild(textArea);
             textArea.focus();
             textArea.select();
-            try {
-                document.execCommand('copy');
-            } catch (err) {
-                console.error('Fallback copy failed', err);
-            }
+            try { document.execCommand('copy'); } catch (err) {}
             document.body.removeChild(textArea);
         }
 
@@ -627,9 +711,7 @@
             document.getElementById('toastMsg').innerText = msg;
             document.getElementById('toastIcon').innerText = icon;
             toast.classList.add('show');
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
+            setTimeout(() => toast.classList.remove('show'), 3000);
         }
 
         function handleKeyAction() {
