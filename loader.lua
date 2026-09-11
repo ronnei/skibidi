@@ -1,5 +1,5 @@
 -- =========================================================================
---   ✨ KEY STEAM RONNEI HUB PREMIUM - BẢN GỘP 1 FORM DUY NHẤT (PHẦN 1/4) ✨
+--   ✨ KEY STEAM RONNEI HUB PREMIUM - FIX NỀN & SẮP XẾP LẠI NÚT (PHẦN 1/4) ✨
 -- =========================================================================
 
 local TweenService = game:GetService("TweenService")
@@ -104,7 +104,7 @@ local function GenerateTodayKey()
     return string.format("Ronneiprime-%04X-%04X-%04X", v1, v2, v3)
 end
 -- =========================================================================
---   ✨ KEY STEAM RONNEI HUB PREMIUM - BẢN GỘP 1 FORM DUY NHẤT (PHẦN 2/4) ✨
+--   ✨ KEY STEAM RONNEI HUB PREMIUM - FIX NỀN & SẮP XẾP LẠI NÚT (PHẦN 2/4) ✨
 -- =========================================================================
 
 local function TakeGuiSnapshot()
@@ -318,7 +318,7 @@ local function ShowLiveToast(titleText, initialSeconds, color)
     end)
 end
 -- =========================================================================
---   ✨ KEY STEAM RONNEI HUB PREMIUM - BẢN GỘP 1 FORM DUY NHẤT (PHẦN 3/4) ✨
+--   ✨ KEY STEAM RONNEI HUB PREMIUM - FIX NỀN & SẮP XẾP LẠI NÚT (PHẦN 3/4) ✨
 -- =========================================================================
 
 local Languages = {
@@ -387,14 +387,14 @@ OpenKeySystemUI = function()
     pcall(function() ScreenGui.Parent = CoreGui end)
     if not ScreenGui.Parent then ScreenGui.Parent = LocalPlayer:WaitForChild("PlayerGui") end
 
-    -- KHUNG DUY NHẤT CHÍNH GIỮA MÀN HÌNH (GỌN GÀNG NHƯ ẢNH GỐC)
+    -- ⭐ KHÔI PHỤC LẠI NỀN TỐI BO GÓC (MAINFRAME ĐẶC, KHÔNG BỊ TRONG SUỐT) ⭐
     local MainFrame = Instance.new("Frame")
     MainFrame.Name = "MainFrame"
     MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
-    MainFrame.Size = UDim2.new(0, 420, 0, 430)
+    MainFrame.Size = UDim2.new(0, 420, 0, 426)
     MainFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
     MainFrame.BackgroundColor3 = Color3.fromRGB(15, 12, 22)
-    MainFrame.BackgroundTransparency = 0.05
+    MainFrame.BackgroundTransparency = 0 -- Đã cố định nền đặc rõ ràng
     MainFrame.BorderSizePixel = 0
     MainFrame.ClipsDescendants = true
     MainFrame.ZIndex = 30
@@ -542,9 +542,26 @@ OpenKeySystemUI = function()
     local TutorialStroke = Instance.new("UIStroke", TutorialBtn)
     TutorialStroke.Color = Color3.fromRGB(75, 40, 105)
 
+    -- ⭐ NHÍCH NÚT NHẬT KÝ LÊN TRÊN (NGAY DƯỚI NÚT TUTORIAL) ⭐
+    local OpenLogBtn = Instance.new("TextButton")
+    OpenLogBtn.Size = UDim2.new(1, -30, 0, 34)
+    OpenLogBtn.Position = UDim2.new(0, 15, 0, 184)
+    OpenLogBtn.BackgroundColor3 = Color3.fromRGB(28, 18, 40)
+    OpenLogBtn.Text = "📑  Nhật Ký Cập Nhật Ronnei Hub V1.2"
+    OpenLogBtn.TextColor3 = Color3.fromRGB(52, 211, 153)
+    OpenLogBtn.TextSize = 11
+    OpenLogBtn.Font = Enum.Font.GothamBlack
+    OpenLogBtn.AutoButtonColor = false
+    OpenLogBtn.ZIndex = 32
+    OpenLogBtn.Parent = MainFrame
+    Instance.new("UICorner", OpenLogBtn).CornerRadius = UDim.new(0, 8)
+    local LogBtnStroke = Instance.new("UIStroke", OpenLogBtn)
+    LogBtnStroke.Color = Color3.fromRGB(80, 50, 110)
+    LogBtnStroke.Thickness = 1.4
+
     local StatusBanner = Instance.new("Frame")
-    StatusBanner.Size = UDim2.new(1, -30, 0, 34)
-    StatusBanner.Position = UDim2.new(0, 15, 0, 186)
+    StatusBanner.Size = UDim2.new(1, -30, 0, 32)
+    StatusBanner.Position = UDim2.new(0, 15, 0, 224)
     StatusBanner.BackgroundColor3 = Color3.fromRGB(24, 14, 34)
     StatusBanner.ClipsDescendants = true
     StatusBanner.ZIndex = 31
@@ -559,7 +576,7 @@ OpenKeySystemUI = function()
     StatusMsg.BackgroundTransparency = 1
     StatusMsg.Text = Languages[CurrentLang].StatusDaily
     StatusMsg.TextColor3 = Color3.fromRGB(253, 230, 138)
-    StatusMsg.TextSize = 11.5
+    StatusMsg.TextSize = 11
     StatusMsg.Font = Enum.Font.GothamBold
     StatusMsg.TextWrapped = true
     StatusMsg.ZIndex = 32
@@ -573,10 +590,10 @@ OpenKeySystemUI = function()
     StatusProgressBar.ZIndex = 31
     StatusProgressBar.Parent = StatusBanner
 
-    -- Khung Lưu Ý (Note Card)
+    -- Khung Lưu Ý (Note Card) ở dưới cùng
     local NoteCard = Instance.new("Frame")
-    NoteCard.Size = UDim2.new(1, -30, 0, 140)
-    NoteCard.Position = UDim2.new(0, 15, 0, 228)
+    NoteCard.Size = UDim2.new(1, -30, 0, 132)
+    NoteCard.Position = UDim2.new(0, 15, 0, 262)
     NoteCard.BackgroundColor3 = Color3.fromRGB(20, 12, 28)
     NoteCard.ZIndex = 31
     NoteCard.Parent = MainFrame
@@ -585,11 +602,11 @@ OpenKeySystemUI = function()
     NoteStroke.Color = Color3.fromRGB(55, 30, 75)
 
     local NoteLabel = Instance.new("TextLabel")
-    NoteLabel.Size = UDim2.new(1, -18, 1, -12)
-    NoteLabel.Position = UDim2.new(0, 9, 0, 6)
+    NoteLabel.Size = UDim2.new(1, -18, 1, -10)
+    NoteLabel.Position = UDim2.new(0, 9, 0, 5)
     NoteLabel.BackgroundTransparency = 1
     NoteLabel.TextColor3 = Color3.fromRGB(253, 230, 138)
-    NoteLabel.TextSize = 10.5
+    NoteLabel.TextSize = 10
     NoteLabel.Font = Enum.Font.GothamMedium
     NoteLabel.TextWrapped = true
     NoteLabel.TextYAlignment = Enum.TextYAlignment.Top
@@ -597,28 +614,11 @@ OpenKeySystemUI = function()
     NoteLabel.ZIndex = 32
     NoteLabel.Text = Languages[CurrentLang].Note
     NoteLabel.Parent = NoteCard
-
-    -- ⭐ NÚT NHẬT KÝ CẬP NHẬT RONNEI HUB V1.2 (ĐẶT Ở KHOẢNG TRỐNG DƯỚI LƯU Ý) ⭐
-    local OpenLogBtn = Instance.new("TextButton")
-    OpenLogBtn.Size = UDim2.new(1, -30, 0, 38)
-    OpenLogBtn.Position = UDim2.new(0, 15, 0, 376)
-    OpenLogBtn.BackgroundColor3 = Color3.fromRGB(28, 18, 40)
-    OpenLogBtn.Text = "📑  Nhật Ký Cập Nhật Ronnei Hub V1.2"
-    OpenLogBtn.TextColor3 = Color3.fromRGB(52, 211, 153)
-    OpenLogBtn.TextSize = 11.5
-    OpenLogBtn.Font = Enum.Font.GothamBlack
-    OpenLogBtn.AutoButtonColor = false
-    OpenLogBtn.ZIndex = 32
-    OpenLogBtn.Parent = MainFrame
-    Instance.new("UICorner", OpenLogBtn).CornerRadius = UDim.new(0, 10)
-    local LogBtnStroke = Instance.new("UIStroke", OpenLogBtn)
-    LogBtnStroke.Color = Color3.fromRGB(80, 50, 110)
-    LogBtnStroke.Thickness = 1.4
     -- =========================================================================
---   ✨ KEY STEAM RONNEI HUB PREMIUM - BẢN GỘP 1 FORM DUY NHẤT (PHẦN 4/4) ✨
+--   ✨ KEY STEAM RONNEI HUB PREMIUM - FIX NỀN & SẮP XẾP LẠI NÚT (PHẦN 4/4) ✨
 -- =========================================================================
 
-    -- MODAL NHẬT KÝ BẢN V1.2 (CHUẨN ẢNH 2 - RAINBOW RGB STROKE)
+    -- MODAL NHẬT KÝ BẢN V1.2 (CHUẨN ẢNH - RAINBOW RGB STROKE)
     local ChangelogModal = Instance.new("Frame")
     ChangelogModal.Name = "ChangelogModal"
     ChangelogModal.AnchorPoint = Vector2.new(0.5, 0.5)
@@ -859,6 +859,8 @@ OpenKeySystemUI = function()
 
     MainFrame.BackgroundTransparency = 1
     MainScale.Scale = 0.4
+    -- Khôi phục hiệu ứng fade in nền chuẩn
+    TweenService:Create(MainFrame, TweenInfo.new(0.35, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), { BackgroundTransparency = 0 }):Play()
     TweenService:Create(MainScale, TweenInfo.new(0.45, Enum.EasingStyle.Back, Enum.EasingDirection.Out), { Scale = 1 }):Play()
 
     GetKeyBtn.MouseButton1Click:Connect(function()
@@ -969,7 +971,6 @@ local trialData = LoadTrialData()
 if not trialData then
     trialData = { StartTime = os.time(), LastSeen = os.time() }
     SaveTrialData(trialData.StartTime, trialData.LastSeen)
-    print("[Ronnei Hub]: Bắt đầu tính giờ 5 phút dùng thử đầu tiên!")
 end
 
 if trialData.Tampered then
