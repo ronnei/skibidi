@@ -1,5 +1,5 @@
 -- =========================================================================
---   ✨ KEY STEAM RONNEI HUB PREMIUM - BẢN FULL 4 PHẦN (PHẦN 1/4) ✨
+--   ✨ KEY STEAM RONNEI HUB PREMIUM - BẢN GỘP 1 FORM DUY NHẤT (PHẦN 1/4) ✨
 -- =========================================================================
 
 local TweenService = game:GetService("TweenService")
@@ -104,7 +104,7 @@ local function GenerateTodayKey()
     return string.format("Ronneiprime-%04X-%04X-%04X", v1, v2, v3)
 end
 -- =========================================================================
---   ✨ KEY STEAM RONNEI HUB PREMIUM - BẢN FULL 4 PHẦN (PHẦN 2/4) ✨
+--   ✨ KEY STEAM RONNEI HUB PREMIUM - BẢN GỘP 1 FORM DUY NHẤT (PHẦN 2/4) ✨
 -- =========================================================================
 
 local function TakeGuiSnapshot()
@@ -318,7 +318,7 @@ local function ShowLiveToast(titleText, initialSeconds, color)
     end)
 end
 -- =========================================================================
---   ✨ KEY STEAM RONNEI HUB PREMIUM - BẢN FULL 4 PHẦN (PHẦN 3/4) ✨
+--   ✨ KEY STEAM RONNEI HUB PREMIUM - BẢN GỘP 1 FORM DUY NHẤT (PHẦN 3/4) ✨
 -- =========================================================================
 
 local Languages = {
@@ -387,29 +387,22 @@ OpenKeySystemUI = function()
     pcall(function() ScreenGui.Parent = CoreGui end)
     if not ScreenGui.Parent then ScreenGui.Parent = LocalPlayer:WaitForChild("PlayerGui") end
 
-    local CenterContainer = Instance.new("Frame")
-    CenterContainer.Name = "CenterContainer"
-    CenterContainer.AnchorPoint = Vector2.new(0.5, 0.5)
-    CenterContainer.Size = UDim2.new(0, 615, 0, 420)
-    CenterContainer.Position = UDim2.new(0.5, 0, 0.5, 0)
-    CenterContainer.BackgroundTransparency = 1
-    CenterContainer.Parent = ScreenGui
-
-    local MainScale = Instance.new("UIScale", CenterContainer)
-    MainScale.Scale = 0.5
-
-    -- 1. KHUNG CHÍNH (BÊN TRÁI): MENU GET KEY LẤP LÁNH
+    -- KHUNG DUY NHẤT CHÍNH GIỮA MÀN HÌNH (GỌN GÀNG NHƯ ẢNH GỐC)
     local MainFrame = Instance.new("Frame")
     MainFrame.Name = "MainFrame"
-    MainFrame.Size = UDim2.new(0, 400, 1, 0)
-    MainFrame.Position = UDim2.new(0, 0, 0, 0)
+    MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+    MainFrame.Size = UDim2.new(0, 420, 0, 430)
+    MainFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
     MainFrame.BackgroundColor3 = Color3.fromRGB(15, 12, 22)
     MainFrame.BackgroundTransparency = 0.05
     MainFrame.BorderSizePixel = 0
     MainFrame.ClipsDescendants = true
     MainFrame.ZIndex = 30
-    MainFrame.Parent = CenterContainer
+    MainFrame.Parent = ScreenGui
     Instance.new("UICorner", MainFrame).CornerRadius = UDim.new(0, 18)
+
+    local MainScale = Instance.new("UIScale", MainFrame)
+    MainScale.Scale = 0.5
 
     local ShimmerGradient = Instance.new("UIGradient")
     ShimmerGradient.Color = ColorSequence.new({
@@ -426,133 +419,11 @@ OpenKeySystemUI = function()
     MainStroke.Thickness = 1.8
     MainStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
 
-    -- 2. SIDE PANEL (BÊN PHẢI): RONNEI HUB & NÚT NHẬT KÝ
-    local SidePanel = Instance.new("Frame")
-    SidePanel.Name = "SidePanel"
-    SidePanel.Size = UDim2.new(0, 205, 0, 260)
-    SidePanel.Position = UDim2.new(0, 410, 0, 0)
-    SidePanel.BackgroundColor3 = Color3.fromRGB(13, 10, 18)
-    SidePanel.BackgroundTransparency = 0.05
-    SidePanel.BorderSizePixel = 0
-    SidePanel.ClipsDescendants = true
-    SidePanel.ZIndex = 30
-    SidePanel.Parent = CenterContainer
-    Instance.new("UICorner", SidePanel).CornerRadius = UDim.new(0, 16)
-
-    local SideStroke = Instance.new("UIStroke", SidePanel)
-    SideStroke.Thickness = 1.8
-    SideStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-
     RunService.RenderStepped:Connect(function()
         local t = tick()
         ShimmerGradient.Rotation = (t * 50) % 360
-        local color = Color3.fromHSV((t * 0.15) % 1, 0.75, 1)
-        MainStroke.Color = color
-        SideStroke.Color = color
+        MainStroke.Color = Color3.fromHSV((t * 0.15) % 1, 0.75, 1)
     end)
-
-    local SideTitle = Instance.new("TextLabel")
-    SideTitle.Size = UDim2.new(1, -20, 0, 22)
-    SideTitle.Position = UDim2.new(0, 12, 0, 10)
-    SideTitle.BackgroundTransparency = 1
-    SideTitle.Text = "RONNEI HUB"
-    SideTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
-    SideTitle.TextSize = 13.5
-    SideTitle.Font = Enum.Font.GothamBlack
-    SideTitle.TextXAlignment = Enum.TextXAlignment.Left
-    SideTitle.ZIndex = 32
-    SideTitle.Parent = SidePanel
-
-    local SideSub = Instance.new("TextLabel")
-    SideSub.Size = UDim2.new(1, -20, 0, 14)
-    SideSub.Position = UDim2.new(0, 12, 0, 30)
-    SideSub.BackgroundTransparency = 1
-    SideSub.Text = "STEAL AN EGG · SPECIAL V1.2"
-    SideSub.TextColor3 = Color3.fromRGB(52, 211, 153)
-    SideSub.TextSize = 9
-    SideSub.Font = Enum.Font.GothamBold
-    SideSub.TextXAlignment = Enum.TextXAlignment.Left
-    SideSub.ZIndex = 32
-    SideSub.Parent = SidePanel
-
-    local FeatureBox = Instance.new("Frame")
-    FeatureBox.Size = UDim2.new(1, -20, 0, 52)
-    FeatureBox.Position = UDim2.new(0, 10, 0, 52)
-    FeatureBox.BackgroundColor3 = Color3.fromRGB(18, 14, 25)
-    FeatureBox.ZIndex = 31
-    FeatureBox.Parent = SidePanel
-    Instance.new("UICorner", FeatureBox).CornerRadius = UDim.new(0, 10)
-    local FeatStroke = Instance.new("UIStroke", FeatureBox)
-    FeatStroke.Color = Color3.fromRGB(52, 211, 153)
-    FeatStroke.Thickness = 1.2
-
-    local FeatName = Instance.new("TextLabel")
-    FeatName.Size = UDim2.new(1, -16, 0, 20)
-    FeatName.Position = UDim2.new(0, 8, 0, 6)
-    FeatName.BackgroundTransparency = 1
-    FeatName.Text = "Anti Guards Wake Up"
-    FeatName.TextColor3 = Color3.fromRGB(255, 255, 255)
-    FeatName.TextSize = 11
-    FeatName.Font = Enum.Font.GothamBold
-    FeatName.TextXAlignment = Enum.TextXAlignment.Left
-    FeatName.ZIndex = 32
-    FeatName.Parent = FeatureBox
-
-    local FeatTag = Instance.new("TextLabel")
-    FeatTag.Size = UDim2.new(1, -16, 0, 16)
-    FeatTag.Position = UDim2.new(0, 8, 0, 26)
-    FeatTag.BackgroundTransparency = 1
-    FeatTag.Text = "[PREMIUM MODE]"
-    FeatTag.TextColor3 = Color3.fromRGB(245, 158, 11)
-    FeatTag.TextSize = 9.5
-    FeatTag.Font = Enum.Font.GothamBlack
-    FeatTag.TextXAlignment = Enum.TextXAlignment.Left
-    FeatTag.ZIndex = 32
-    FeatTag.Parent = FeatureBox
-
-    local TikTokCard = Instance.new("Frame")
-    TikTokCard.Size = UDim2.new(1, -20, 0, 42)
-    TikTokCard.Position = UDim2.new(0, 10, 0, 114)
-    TikTokCard.BackgroundColor3 = Color3.fromRGB(18, 14, 25)
-    TikTokCard.ZIndex = 31
-    TikTokCard.Parent = SidePanel
-    Instance.new("UICorner", TikTokCard).CornerRadius = UDim.new(0, 10)
-
-    local TTIcon = Instance.new("TextLabel")
-    TTIcon.Size = UDim2.new(0, 30, 1, 0)
-    TTIcon.Position = UDim2.new(0, 6, 0, 0)
-    TTIcon.BackgroundTransparency = 1
-    TTIcon.Text = "📱"
-    TTIcon.TextSize = 16
-    TTIcon.ZIndex = 32
-    TTIcon.Parent = TikTokCard
-
-    local TTLabel = Instance.new("TextLabel")
-    TTLabel.Size = UDim2.new(1, -42, 1, 0)
-    TTLabel.Position = UDim2.new(0, 38, 0, 0)
-    TTLabel.BackgroundTransparency = 1
-    TTLabel.Text = "TikTok: @ronnei7.htk"
-    TTLabel.TextColor3 = Color3.fromRGB(229, 231, 235)
-    TTLabel.TextSize = 10
-    TTLabel.Font = Enum.Font.GothamBold
-    TTLabel.TextXAlignment = Enum.TextXAlignment.Left
-    TTLabel.ZIndex = 32
-    TTLabel.Parent = TikTokCard
-
-    local OpenLogBtn = Instance.new("TextButton")
-    OpenLogBtn.Size = UDim2.new(1, -20, 0, 38)
-    OpenLogBtn.Position = UDim2.new(0, 10, 0, 168)
-    OpenLogBtn.BackgroundColor3 = Color3.fromRGB(25, 18, 35)
-    OpenLogBtn.Text = "📑  Nhật Ký Cập Nhật V1.2"
-    OpenLogBtn.TextColor3 = Color3.fromRGB(52, 211, 153)
-    OpenLogBtn.TextSize = 10.5
-    OpenLogBtn.Font = Enum.Font.GothamBlack
-    OpenLogBtn.AutoButtonColor = false
-    OpenLogBtn.ZIndex = 32
-    OpenLogBtn.Parent = SidePanel
-    Instance.new("UICorner", OpenLogBtn).CornerRadius = UDim.new(0, 10)
-    local LogBtnStroke = Instance.new("UIStroke", OpenLogBtn)
-    LogBtnStroke.Color = Color3.fromRGB(60, 40, 85)
 
     local HeaderBar = Instance.new("Frame")
     HeaderBar.Size = UDim2.new(1, -30, 0, 40)
@@ -602,7 +473,7 @@ OpenKeySystemUI = function()
 
     local InputBox = Instance.new("TextBox")
     InputBox.Size = UDim2.new(1, -30, 0, 36)
-    InputBox.Position = UDim2.new(0, 15, 0, 60)
+    InputBox.Position = UDim2.new(0, 15, 0, 58)
     InputBox.BackgroundColor3 = Color3.fromRGB(22, 14, 32)
     InputBox.TextColor3 = Color3.fromRGB(254, 243, 199)
     InputBox.PlaceholderColor3 = Color3.fromRGB(147, 112, 175)
@@ -619,7 +490,7 @@ OpenKeySystemUI = function()
 
     local ButtonsRow = Instance.new("Frame")
     ButtonsRow.Size = UDim2.new(1, -30, 0, 38)
-    ButtonsRow.Position = UDim2.new(0, 15, 0, 104)
+    ButtonsRow.Position = UDim2.new(0, 15, 0, 102)
     ButtonsRow.BackgroundTransparency = 1
     ButtonsRow.ZIndex = 31
     ButtonsRow.Parent = MainFrame
@@ -658,7 +529,7 @@ OpenKeySystemUI = function()
 
     local TutorialBtn = Instance.new("TextButton")
     TutorialBtn.Size = UDim2.new(1, -30, 0, 30)
-    TutorialBtn.Position = UDim2.new(0, 15, 0, 150)
+    TutorialBtn.Position = UDim2.new(0, 15, 0, 148)
     TutorialBtn.BackgroundColor3 = Color3.fromRGB(28, 16, 38)
     TutorialBtn.Text = Languages[CurrentLang].Tutorial
     TutorialBtn.TextColor3 = Color3.fromRGB(251, 191, 36)
@@ -673,7 +544,7 @@ OpenKeySystemUI = function()
 
     local StatusBanner = Instance.new("Frame")
     StatusBanner.Size = UDim2.new(1, -30, 0, 34)
-    StatusBanner.Position = UDim2.new(0, 15, 0, 188)
+    StatusBanner.Position = UDim2.new(0, 15, 0, 186)
     StatusBanner.BackgroundColor3 = Color3.fromRGB(24, 14, 34)
     StatusBanner.ClipsDescendants = true
     StatusBanner.ZIndex = 31
@@ -702,9 +573,10 @@ OpenKeySystemUI = function()
     StatusProgressBar.ZIndex = 31
     StatusProgressBar.Parent = StatusBanner
 
+    -- Khung Lưu Ý (Note Card)
     local NoteCard = Instance.new("Frame")
-    NoteCard.Size = UDim2.new(1, -30, 0, 178)
-    NoteCard.Position = UDim2.new(0, 15, 0, 230)
+    NoteCard.Size = UDim2.new(1, -30, 0, 140)
+    NoteCard.Position = UDim2.new(0, 15, 0, 228)
     NoteCard.BackgroundColor3 = Color3.fromRGB(20, 12, 28)
     NoteCard.ZIndex = 31
     NoteCard.Parent = MainFrame
@@ -725,15 +597,32 @@ OpenKeySystemUI = function()
     NoteLabel.ZIndex = 32
     NoteLabel.Text = Languages[CurrentLang].Note
     NoteLabel.Parent = NoteCard
+
+    -- ⭐ NÚT NHẬT KÝ CẬP NHẬT RONNEI HUB V1.2 (ĐẶT Ở KHOẢNG TRỐNG DƯỚI LƯU Ý) ⭐
+    local OpenLogBtn = Instance.new("TextButton")
+    OpenLogBtn.Size = UDim2.new(1, -30, 0, 38)
+    OpenLogBtn.Position = UDim2.new(0, 15, 0, 376)
+    OpenLogBtn.BackgroundColor3 = Color3.fromRGB(28, 18, 40)
+    OpenLogBtn.Text = "📑  Nhật Ký Cập Nhật Ronnei Hub V1.2"
+    OpenLogBtn.TextColor3 = Color3.fromRGB(52, 211, 153)
+    OpenLogBtn.TextSize = 11.5
+    OpenLogBtn.Font = Enum.Font.GothamBlack
+    OpenLogBtn.AutoButtonColor = false
+    OpenLogBtn.ZIndex = 32
+    OpenLogBtn.Parent = MainFrame
+    Instance.new("UICorner", OpenLogBtn).CornerRadius = UDim.new(0, 10)
+    local LogBtnStroke = Instance.new("UIStroke", OpenLogBtn)
+    LogBtnStroke.Color = Color3.fromRGB(80, 50, 110)
+    LogBtnStroke.Thickness = 1.4
     -- =========================================================================
---   ✨ KEY STEAM RONNEI HUB PREMIUM - BẢN FULL 4 PHẦN (PHẦN 4/4) ✨
+--   ✨ KEY STEAM RONNEI HUB PREMIUM - BẢN GỘP 1 FORM DUY NHẤT (PHẦN 4/4) ✨
 -- =========================================================================
 
-    -- 3. POPUP MODAL NHẬT KÝ BẢN V1.2 (CHUẨN ẢNH 2 - RAINBOW STROKE)
+    -- MODAL NHẬT KÝ BẢN V1.2 (CHUẨN ẢNH 2 - RAINBOW RGB STROKE)
     local ChangelogModal = Instance.new("Frame")
     ChangelogModal.Name = "ChangelogModal"
     ChangelogModal.AnchorPoint = Vector2.new(0.5, 0.5)
-    ChangelogModal.Size = UDim2.new(0, 390, 0, 330)
+    ChangelogModal.Size = UDim2.new(0, 400, 0, 340)
     ChangelogModal.Position = UDim2.new(0.5, 0, 1.5, 0)
     ChangelogModal.BackgroundColor3 = Color3.fromRGB(14, 10, 18)
     ChangelogModal.BorderSizePixel = 0
@@ -844,7 +733,7 @@ OpenKeySystemUI = function()
         TweenService:Create(ChangelogModal, TweenInfo.new(0.25, Enum.EasingStyle.Quad, Enum.EasingDirection.In), { Position = UDim2.new(0.5, 0, 1.5, 0) }):Play()
     end)
 
-    -- Modal ngôn ngữ
+    -- Modal đổi ngôn ngữ
     local LangModal = Instance.new("Frame")
     LangModal.Size = UDim2.new(1, 0, 1, 0)
     LangModal.Position = UDim2.new(0, 0, 1, 0)
@@ -968,7 +857,7 @@ OpenKeySystemUI = function()
     OptViBtn.MouseButton1Click:Connect(function() PlayDeepBounce(OptViBtn); SetLanguage("VI"); task.wait(0.15); CloseLangModal() end)
     OptEnBtn.MouseButton1Click:Connect(function() PlayDeepBounce(OptEnBtn); SetLanguage("EN"); task.wait(0.15); CloseLangModal() end)
 
-    CenterContainer.BackgroundTransparency = 1
+    MainFrame.BackgroundTransparency = 1
     MainScale.Scale = 0.4
     TweenService:Create(MainScale, TweenInfo.new(0.45, Enum.EasingStyle.Back, Enum.EasingDirection.Out), { Scale = 1 }):Play()
 
@@ -1065,7 +954,7 @@ OpenKeySystemUI = function()
 end
 
 -- =========================================================================
---   4. LUỒNG THI HÀNH VỚI MỐC 5 PHÚT THỜI GIAN THỰC (LOCKDOWN AT 300S)
+--   LUỒNG CHÍNH ĐẾM NGƯỢC 5 PHÚT & BẢO MẬT KHÓA MÀN HÌNH
 -- =========================================================================
 
 local keyTimeLeft = GetKeyRemainingTime()
