@@ -1,12 +1,920 @@
---[[
- .____                  ________ ___.    _____                           __                
- |    |    __ _______   \_____  \\_ |___/ ____\_ __  ______ ____ _____ _/  |_  ___________ 
- |    |   |  |  \__  \   /   |   \| __ \   __\  |  \/  ___// ___\\__  \\   __\/  _ \_  __ \
- |    |___|  |  // __ \_/    |    \ \_\ \  | |  |  /\___ \\  \___ / __ \|  | (  <_> )  | \/
- |_______ \____/(____  /\_______  /___  /__| |____//____  >\___  >____  /__|  \____/|__|   
-         \/          \/         \/    \/                \/     \/     \/                   
-          \_Welcome to LuaObfuscator.com   (Alpha 0.10.9) ~  Much Love, Ferib 
+-- =========================================================================
+--   👑 KEY STEAM LUMIN HUB V2 - STEAL AN EGG 🥚 (PHẦN 1/4)
+--   CƠ CHẾ BẢN QUYỀN 24H · DÙNG THỬ 2 PHÚT · BẢO MẬT OBSIDIAN GOLD
+-- =========================================================================
 
-]]--
+local TweenService = game:GetService("TweenService")
+local RunService = game:GetService("RunService")
+local HttpService = game:GetService("HttpService")
+local CoreGui = game:GetService("CoreGui")
+local Players = game:GetService("Players")
+local Lighting = game:GetService("Lighting")
 
-local v0=tonumber;local v1=string.byte;local v2=string.char;local v3=string.sub;local v4=string.gsub;local v5=string.rep;local v6=table.concat;local v7=table.insert;local v8=math.ldexp;local v9=getfenv or function() return _ENV;end ;local v10=setmetatable;local v11=pcall;local v12=select;local v13=unpack or table.unpack ;local v14=tonumber;local function v15(v16,v17,...) local v18=1;local v19;v16=v4(v3(v16,5),"..",function(v30) if (v1(v30,2)==81) then local v88=0;while true do if (v88==0) then v19=v0(v3(v30,1,1));return "";end end else local v89=v2(v0(v30,16));if v19 then local v112=0;local v113;while true do if (v112==1) then return v113;end if (v112==0) then v113=v5(v89,v19);v19=nil;v112=1;end end else return v89;end end end);local function v20(v31,v32,v33) if v33 then local v90=0;local v91;while true do if (v90==(0 -0)) then v91=(v31/((5 -(1640 -(1523 + 114)))^(v32-(1 -(0 + 0)))))%(((5 -1) -2)^(((v33-(620 -(555 + 64))) -(v32-(932 -(857 + 74)))) + 1)) ;return v91-(v91%(569 -(367 + 201))) ;end end else local v92=927 -(214 + 713) ;local v93;while true do if (v92==(0 + 0)) then v93=(1 + 1)^(v32-1) ;return (((v31%(v93 + v93))>=v93) and 1) or (877 -(282 + 595)) ;end end end end local function v21() local v34=1065 -(68 + 997) ;local v35;while true do if (v34==(1271 -(226 + 1024 + 20))) then return v35;end if (v34==((0 + 0) -0)) then v35=v1(v16,v18,v18);v18=v18 + (118 -(32 + 85)) ;v34=1;end end end local function v22() local v36,v37=v1(v16,v18,v18 + (4 -2) );v18=v18 + (3 -1) ;return (v37 * (1213 -(892 + 65))) + v36 ;end local function v23() local v38,v39,v40,v41=v1(v16,v18,v18 + (4 -1) );v18=v18 + (354 -(87 + (645 -382))) ;return (v41 * (16777396 -(50 + 17 + 113))) + (v40 * (48056 + 17480)) + (v39 * 256) + v38 ;end local function v24() local v42=v23();local v43=v23();local v44=(441 -(145 + 293)) -2 ;local v45=(v20(v43,(1395 -(416 + 26)) -(802 + 150) ,53 -33 ) * ((3 -1)^(24 + 8))) + v42 ;local v46=v20(v43,21,31);local v47=((v20(v43,(3285 -2256) -(915 + 82) )==1) and  -((1 + 1) -1)) or (1 + (430 -(44 + 386))) ;if (v46==((0 -0) -0)) then if (v45==(1187 -(1069 + 118))) then return v47 * (0 -0) ;else local v114=0;while true do if (v114==(0 -0)) then v46=1;v44=0 + 0 + 0 ;break;end end end elseif (v46==(3636 -1589)) then return ((v45==(0 + 0)) and (v47 * ((792 -(368 + 423))/0))) or (v47 * NaN) ;end return v8(v47,v46-((2632 + 582) -2191) ) * (v44 + (v45/(((792 -(201 + 571)) -(10 + 8))^((1337 -(116 + 1022)) -(611 -464))))) ;end local function v25(v48) local v49;if  not v48 then local v94=0 + 0 ;while true do if (v94==0) then v48=v23();if (v48==0) then return "";end break;end end end v49=v3(v16,v18,(v18 + v48) -(3 -2) );v18=v18 + v48 ;local v50={};for v66=3 -2 , #v49 do v50[v66]=v2(v1(v3(v49,v66,v66)));end return v6(v50);end local v26=v23;local function v27(...) return {...},v12("#",...);end local function v28() local v51=(function() return function(v95,v96,v97,v98,v99,v100,v101,v102,v103) local v104=(function() return 0 + 0 ;end)();local v95=(function() return;end)();local v96=(function() return;end)();while true do if (v104==(0 -0)) then local v121=(function() return 0 -0 ;end)();local v122=(function() return;end)();while true do if (v121~=0) then else v122=(function() return 867 -(550 + 317) ;end)();while true do if (v122~=1) then else v104=(function() return 1 -0 ;end)();break;end if (v122==0) then v95=(function() return 0 -0 ;end)();v96=(function() return nil;end)();v122=(function() return 2 -1 ;end)();end end break;end end end if (v104~=1) then else local v123=(function() return 285 -(134 + 151) ;end)();while true do if (v123~=(1665 -(970 + 695))) then else local v126=(function() return 0 -0 ;end)();while true do if (0~=v126) then else while true do if ((1990 -(582 + 1408))~=v95) then else v96=(function() return v97();end)();if (v98(v96, #"~", #",")~=0) then else local v240=(function() return 0 -0 ;end)();local v241=(function() return;end)();local v242=(function() return;end)();local v243=(function() return;end)();local v244=(function() return;end)();while true do if (v240~=(0 -0)) then else v241=(function() return 0;end)();v242=(function() return nil;end)();v240=(function() return 3 -2 ;end)();end if (v240~=1) then else local v350=(function() return 0;end)();local v351=(function() return;end)();while true do if (v350==0) then v351=(function() return 1824 -(1195 + 629) ;end)();while true do if (v351==(1 -0)) then v240=(function() return 243 -(187 + 54) ;end)();break;end if (v351==(780 -(162 + 618))) then v243=(function() return nil;end)();v244=(function() return nil;end)();v351=(function() return 1;end)();end end break;end end end if (2==v240) then while true do if (v241==2) then local v390=(function() return 0 + 0 ;end)();while true do if (v390==(1 + 0)) then v241=(function() return  #"-19";end)();break;end if ((0 -0)==v390) then if (v98(v243, #"|", #"[")~= #"!") then else v244[2]=(function() return v99[v244[2 -0 ]];end)();end if (v98(v243,2,1 + 1 )== #"[") then v244[ #"91("]=(function() return v99[v244[ #"xxx"]];end)();end v390=(function() return 1;end)();end end end if (v241~= #"\\") then else local v391=(function() return 0;end)();local v392=(function() return;end)();while true do if ((1636 -(1373 + 263))~=v391) then else v392=(function() return 1000 -(451 + 549) ;end)();while true do if (v392==(0 + 0)) then v244=(function() return {v100(),v100(),nil,nil};end)();if (v242==0) then local v398=(function() return 0;end)();local v399=(function() return;end)();while true do if (v398~=0) then else v399=(function() return 0 -0 ;end)();while true do if (v399~=(1384 -(746 + 638))) then else v244[ #"asd"]=(function() return v100();end)();v244[ #"0313"]=(function() return v100();end)();break;end end break;end end elseif (v242== #"~") then v244[ #"gha"]=(function() return v101();end)();elseif (v242==(1 + 1)) then v244[ #"asd"]=(function() return v101() -(2^16) ;end)();elseif (v242~= #"asd") then else local v404=(function() return 0 -0 ;end)();local v405=(function() return;end)();while true do if (v404~=0) then else v405=(function() return 0;end)();while true do if (v405~=(341 -(218 + 123))) then else v244[ #"xnx"]=(function() return v101() -(2^16) ;end)();v244[ #"0313"]=(function() return v100();end)();break;end end break;end end end v392=(function() return 1;end)();end if (v392==1) then v241=(function() return 1583 -(1535 + 46) ;end)();break;end end break;end end end if (v241~=(0 + 0)) then else local v393=(function() return 0 + 0 ;end)();while true do if (v393==(560 -(306 + 254))) then v242=(function() return v98(v96,2, #"asd");end)();v243=(function() return v98(v96, #"asd1",1 + 5 );end)();v393=(function() return 1 -0 ;end)();end if (v393~=1) then else v241=(function() return  #",";end)();break;end end end if (v241== #"91(") then if (v98(v243, #"19(", #"xxx")~= #">") then else v244[ #"0313"]=(function() return v99[v244[ #"0836"]];end)();end v102[v103]=(function() return v244;end)();break;end end break;end end end break;end end return v95,v96,v97,v98,v99,v100,v101,v102,v103;end end end end end end end;end)();local v52=(function() return function(v105,v106,v107) local v108=(function() return 0;end)();local v109=(function() return;end)();while true do if (v108~=0) then else v109=(function() return 0;end)();while true do if (v109~=(1467 -(899 + 568))) then else local v127=(function() return 0 + 0 ;end)();local v128=(function() return;end)();while true do if (v127~=0) then else v128=(function() return 0 -0 ;end)();while true do if (v128~=(603 -(268 + 335))) then else v105[v106-#"{" ]=(function() return v107();end)();return v105,v106,v107;end end break;end end end end break;end end end;end)();local v53=(function() return {};end)();local v54=(function() return {};end)();local v55=(function() return {};end)();local v56=(function() return {v53,v54,nil,v55};end)();local v57=(function() return v23();end)();local v58=(function() return {};end)();for v68= #"{",v57 do local v69=(function() return 572 -(426 + 146) ;end)();local v70=(function() return;end)();local v71=(function() return;end)();while true do if (v69==(0 + 0)) then local v115=(function() return 1456 -(282 + 1174) ;end)();while true do if (v115==0) then v70=(function() return v21();end)();v71=(function() return nil;end)();v115=(function() return 1;end)();end if (v115==1) then v69=(function() return 812 -(569 + 242) ;end)();break;end end end if ((2 -1)==v69) then if (v70== #"]") then v71=(function() return v21()~=(0 + 0) ;end)();elseif (v70==(1026 -(706 + 318))) then v71=(function() return v24();end)();elseif (v70~= #"xxx") then else v71=(function() return v25();end)();end v58[v68]=(function() return v71;end)();break;end end end v56[ #"xnx"]=(function() return v21();end)();for v72= #"/",v23() do FlatIdent_7FAC9,Descriptor,v21,v20,v58,v22,v23,v53,v72=(function() return v51(FlatIdent_7FAC9,Descriptor,v21,v20,v58,v22,v23,v53,v72);end)();end for v73= #"}",v23() do v54,v73,v28=(function() return v52(v54,v73,v28);end)();end return v56;end local function v29(v60,v61,v62) local v63=v60[1 + 0 ];local v64=v60[2 + 0 + 0 ];local v65=v60[1254 -(721 + 530) ];return function(...) local v74=v63;local v75=v64;local v76=v65;local v77=v27;local v78=1272 -(945 + (859 -533)) ;local v79= -(1727 -(1668 + 58));local v80={};local v81={...};local v82=v12("#",...) -1 ;local v83={};local v84={};for v110=0 + 0 ,v82 do if ((2395==2395) and (v110>=v76)) then v80[v110-v76 ]=v81[v110 + (701 -(271 + 429)) ];else v84[v110]=v81[v110 + 1 + (0 -0) ];end end local v85=(v82-v76) + (1501 -(1408 + 92)) ;local v86;local v87;while true do local v111=(2185 -(35 + 1064)) -(336 + 125 + 625) ;while true do if (v111==(1289 -(993 + 295))) then if ((3780>2709) and (v87<=((2 -1) + 15))) then if (v87<=(7 + 0)) then if ((v87<=(1174 -(418 + 753))) or (237>=2273)) then if (v87<=(1 + 0)) then if (v87>(1469 -(1269 + 200))) then local v130=v86[1 + 1 ];v84[v130]=v84[v130](v13(v84,v130 + 1 + 0 ,v86[829 -(802 + 24) ]));else local v132=0 + 0 ;local v133;local v134;local v135;while true do if (v132==(529 -(406 + 123))) then v133=v75[v86[1772 -(1749 + 20) ]];v134=nil;v132=1 + 0 ;end if ((v132==(1 + 0)) or (2040<=703)) then v135={};v134=v10({},{__index=function(v352,v353) local v354=v135[v353];return v354[1323 -(1249 + 73) ][v354[1 + 1 ]];end,__newindex=function(v355,v356,v357) local v358=v135[v356];v358[1 + 0 ][v358[6 -4 ]]=v357;end});v132=1 + 1 ;end if ((3279<=3967) and (v132==(1 + 1))) then for v360=(1237 -(298 + 938)) + (1259 -(233 + 1026)) ,v86[4] do v78=v78 + (1146 -(466 + 679)) ;local v361=v74[v78];if ((v361[2 -1 ]==(17 -11)) or (1988==877)) then v135[v360-(1901 -(106 + 1794)) ]={v84,v361[8 -5 ]};else v135[v360-(2 -1) ]={v61,v361[1430 -(41 + 1386) ]};end v83[ #v83 + (104 -(17 + 86)) ]=v135;end v84[v86[2 + 0 ]]=v29(v133,v134,v62);break;end end end elseif (v87>(328 -(192 + 134))) then local v136=1276 -(316 + 960) ;local v137;local v138;local v139;local v140;local v141;while true do if (v136==(2 + 0)) then v84[v141 + (1 -0) ]=v140;v84[v141]=v140[v86[4 + 0 + 0 ]];v78=v78 + (2 -1) ;v86=v74[v78];v84[v86[168 -(122 + 44) ]]=v86[5 -2 ];v78=v78 + (4 -3) ;v136=9 -6 ;end if (v136==(2 -1)) then v86=v74[v78];v84[v86[2 + 0 ]]=v62[v86[1 + 2 ]];v78=v78 + (1 -(0 + 0)) ;v86=v74[v78];v141=v86[67 -(30 + 35) ];v140=v84[v86[3 + 0 ]];v136=1259 -(1043 + 15 + 199) ;end if (v136==(15 -11)) then v78=v78 + (1213 -(323 + 889)) ;v86=v74[v78];v141=v86[223 -(55 + 166) ];v84[v141]=v84[v141](v13(v84,v141 + (2 -1) ,v79));v78=v78 + (581 -(361 + 219)) ;v86=v74[v78];v136=325 -(53 + 267) ;end if (v136==(0 + 0)) then v137=nil;v138,v139=nil;v140=nil;v141=nil;v84[v86[415 -(15 + 398) ]]=v62[v86[985 -(18 + 964) ]];v78=v78 + (3 -2) ;v136=1949 -(1096 + 852) ;end if ((4291>1912) and (v136==(2 + 1))) then v86=v74[v78];v141=v86[2 + 0 + 0 ];v138,v139=v77(v84[v141](v13(v84,v141 + (851 -(20 + 830)) ,v86[1 + 2 + 0 ])));v79=(v139 + v141) -(127 -(116 + 10)) ;v137=0 + (0 -0) ;for v363=v141,v79 do v137=v137 + (739 -((839 -(36 + 261)) + 196)) ;v84[v363]=v138[v137];end v136=8 -4 ;end if (v136==(241 -(46 + 190))) then v84[v86[1 + 1 ]]();v78=v78 + 1 + (0 -0) ;v86=v74[v78];do return;end break;end end elseif  not v84[v86[2]] then v78=v78 + (1318 -(1114 + 203)) ;else v78=v86[2 + 1 ];end elseif ((2003<2339) and (v87<=5)) then if ((432==432) and (v87==(10 -6))) then v84[v86[4 -2 ]]=v29(v75[v86[1554 -(1126 + 425) ]],nil,v62);else do return;end end elseif ((v87>(411 -(118 + 287))) or (1145>=1253)) then local v143=(1368 -(34 + 1334)) -0 ;local v144;while true do if (v143==(1121 -(118 + 1003))) then v144=v86[5 -3 ];v84[v144]=v84[v144]();break;end end else v84[v86[379 -(55 + 87 + 235) ]]=v84[v86[13 -10 ]];end elseif (v87<=(3 + 7 + 1)) then if ((3418>2118) and (v87<=(986 -(553 + (1707 -(1035 + 248)))))) then if (v87==(14 -6)) then v78=v86[3 + 0 ];else v84[v86[2 + 0 ]]=v61[v86[7 -4 ]];end elseif ((3066<=3890) and (v87==(6 + 4))) then v84[v86[1 + 1 ]]=v84[v86[2 + 1 ]][v86[8 -4 ]];else local v152=v86[5 -(24 -(20 + 1)) ];local v153,v154=v77(v84[v152](v13(v84,v152 + (2 -1) ,v86[1 + 2 ])));v79=(v154 + v152) -(4 -3) ;local v155=(393 + 360) -(239 + (833 -(134 + 185))) ;for v245=v152,v79 do v155=v155 + 1 + 0 ;v84[v245]=v153[v155];end end elseif (v87<=(1342 -(797 + 532))) then if (v87==(9 + 3)) then local v156=v86[1 + (1134 -(549 + 584)) ];v84[v156]=v84[v156](v13(v84,v156 + (2 -1) ,v79));else v84[v86[1204 -(373 + 829) ]]=v86[(1419 -(314 + 371)) -(476 + 255) ];end elseif (v87<=(1144 -(369 + 761))) then v84[v86[2]]=v62[v86[13 -10 ]];elseif ((v87>(9 + (20 -14))) or (2998>=3281)) then v84[v86[2 -0 ]][v86[5 -2 ]]=v84[v86[242 -(64 + 174) ]];else local v259=0 + (968 -(478 + 490)) ;local v260;local v261;local v262;local v263;local v264;while true do if ((v259==(8 -2)) or (4649<=2632)) then for v384=v264,v79 do v261=v261 + (337 -(144 + 192)) ;v84[v384]=v260[v261];end v78=v78 + (33 -(19 + 13)) ;v86=v74[v78];v259=11 -4 ;end if (v259==(218 -(42 + 174))) then v78=v78 + (2 -1) ;v86=v74[v78];v264=v86[2 + 0 ];v259=3;end if ((1 -0)==v259) then v263=nil;v264=nil;v84[v86[2 + 0 ]]=v62[v86[2 + 0 + 1 ]];v259=1506 -(363 + 1141) ;end if ((v259==5) or (3860>4872)) then v260,v262=v77(v84[v264](v84[v264 + (1581 -(1183 + 397)) ]));v79=(v262 + v264) -(2 -1) ;v261=0 -0 ;v259=5 + 1 ;end if (((1172 -(786 + 386)) + 0)==v259) then v260=nil;v261=nil;v260,v262=nil;v259=1976 -(1913 + (200 -138)) ;end if (v259==(6 + 3)) then v78=v86[7 -4 ];break;end if (v259==7) then v264=v86[1935 -(565 + 1368) ];v260={v84[v264](v13(v84,v264 + (1662 -(1477 + 184)) ,v79))};v261=0 -0 ;v259=8 + 0 ;end if (v259==(859 -(564 + 292))) then v263=v84[v86[1099 -(709 + 387) ]];v84[v264 + (1 -0) ]=v263;v84[v264]=v263[v86[4]];v259=(1390 -(1055 + 324)) -7 ;end if ((23 -15)==v259) then for v387=v264,v86[308 -(244 + 60) ] do v261=v261 + (1 -0) ;v84[v387]=v260[v261];end v78=v78 + 1 + 0 ;v86=v74[v78];v259=485 -(41 + 435) ;end if ((v259==(1005 -(938 + 63))) or (3998==2298)) then v78=v78 + 1 + 0 ;v86=v74[v78];v264=v86[2];v259=9 -4 ;end end end elseif (v87<=(1149 -(936 + 189))) then if (v87<=(7 + 13)) then if (v87<=(1631 -(1565 + 48))) then if (v87>(11 + 6)) then v84[v86[(2480 -(1093 + 247)) -(782 + 356) ]]();else local v162=v86[269 -(176 + 91) ];local v163=v86[458 -(13 + 441) ];local v164=v162 + (4 -2) ;local v165={v84[v162](v84[v162 + (4 -3) ],v84[v164])};for v248=1093 -(975 + 117) ,v163 do v84[v164 + v248 ]=v165[v248];end local v166=v165[1876 -(157 + 1718) ];if v166 then local v265=0 + 0 ;while true do if (v265==(0 + (0 -0))) then v84[v164]=v166;v78=v86[10 -7 ];break;end end else v78=v78 + (3 -2) ;end end elseif (v87>((3519 -2482) -(697 + 321))) then local v167;local v168;v168=v86[3 -1 ];v84[v168]=v84[v168]();v78=v78 + 1 + 0 ;v86=v74[v78];v84[v86[(5 -3) + 0 ]]=v84[v86[(17 -10) -4 ]][v86[3 + 1 ]];v78=v78 + 1 + 0 ;v86=v74[v78];v84[v86[2 + 0 ]]=v62[v86[5 -2 ]];v78=v78 + (2 -1) ;v86=v74[v78];v84[v86[2 + 0 ]]=v84[v86[2 + 1 ]][v86[6 -2 ]];v78=v78 + (2 -1) ;v86=v74[v78];v84[v86[2 + 0 + 0 ]]=v84[v86[1230 -(322 + 905) ]][v86[615 -(602 + 9) ]];v78=v78 + (1190 -(449 + 740)) ;v86=v74[v78];v84[v86[874 -(826 + 46) ]][v86[3]]=v84[v86[951 -(245 + (2704 -2002)) ]];v78=v78 + (3 -2) ;v86=v74[v78];v84[v86[2 + 0 ]]=v62[v86[1 + 2 ]];v78=v78 + (1899 -(260 + (5645 -4007))) ;v86=v74[v78];v168=v86[442 -(382 + 58) ];v167=v84[v86[9 -6 ]];v84[v168 + 1 + 0 ]=v167;v84[v168]=v167[v86[4]];v78=v78 + (1 -0) ;v86=v74[v78];v84[v86[88 -(84 + 2) ]]=v86[4 -(1 + 0) ];v78=v78 + 1 ;v86=v74[v78];v168=v86[5 -3 ];v84[v168]=v84[v168](v13(v84,v168 + (1206 -((2306 -1404) + 303)) ,v86[5 -2 ]));v78=v78 + ((690 -(364 + 324)) -1) ;v86=v74[v78];v84[v86[1 + 1 ]]=v84[v86[1693 -(1121 + 569) ]];v78=v78 + 1 + 0 ;v86=v74[v78];v84[v86[3 -1 ]]=v86[217 -(22 + 192) ];else v84[v86[685 -(483 + 200) ]][v86[1466 -(1404 + 59) ]]=v86[10 -6 ];end elseif (v87<=(29 -7)) then if (v87>(786 -(468 + 297))) then local v195=v86[564 -(334 + (624 -396)) ];local v196,v197=v77(v84[v195](v84[v195 + (3 -(4 -2)) ]));v79=(v197 + v195) -(2 -1) ;local v198=0 -0 ;for v251=v195,v79 do v198=v198 + 1 + 0 ;v84[v251]=v196[v198];end else local v199=(79 + 157) -(141 + 95) ;local v200;while true do if (v199==(0 + 0)) then v200=v86[4 -2 ];v84[v200](v84[v200 + (2 -1) ]);break;end end end elseif (v87==(6 + 17)) then local v201=v86[5 -3 ];local v202=v84[v86[2 + 1 ]];v84[v201 + 1 + 0 ]=v202;v84[v201]=v202[v86[3 + 1 ]];else local v206;local v207;v84[v86[2]]=v84[v86[(16 -12) -1 ]][v86[1804 -(884 + 916) ]];v78=v78 + 1 + 0 ;v86=v74[v78];v207=v86[165 -(92 + (113 -42)) ];v206=v84[v86[2 + 1 ]];v84[v207 + (1 -0) ]=v206;v84[v207]=v206[v86[769 -((1743 -1169) + 191) ]];v78=v78 + (1269 -(1249 + 19)) + 0 ;v86=v74[v78];v84[v86[6 -4 ]]=v84[v86[7 -4 ]];v78=v78 + 1 + 0 ;v86=v74[v78];v207=v86[1 + 1 ];v84[v207](v13(v84,v207 + (1454 -(666 + 787)) ,v86[428 -(360 + 65) ]));v78=v78 + (850 -(254 + 595)) ;v86=v74[v78];v78=v86[257 -(79 + 175) ];end elseif (v87<=(43 -(14 + 1))) then if ((v87<=(152 -(55 + 71))) or (8>=2739)) then if ((2590==2590) and (v87>(32 -(27 -20)))) then local v220=v86[1792 -(573 + 1217) ];v84[v220](v13(v84,v220 + (2 -1) ,v86[1 + 2 ]));else local v221=(1086 -(686 + 400)) -0 ;while true do if (v221==(942 -(561 + 153 + 225))) then v84[v86[5 -3 ]][v86[3]]=v84[v86[3 + 1 ]];v78=v78 + (1 -0) ;v86=v74[v78];v221=1 + 3 ;end if (v221==(3 -2)) then v84[v86[(231 -(73 + 156)) -0 ]]=v84[v86[1 + 2 ]][v86[4]];v78=v78 + (807 -(118 + 688)) ;v86=v74[v78];v221=50 -(1 + 24 + 23) ;end if (v221==((812 -(721 + 90)) + 1)) then v84[v86[5 -3 ]]=v84[v86[1 + 0 + 2 ]][v86[1890 -(927 + 959) ]];v78=v78 + (1 -0) ;v86=v74[v78];v221=3;end if (v221==(13 -(29 -20))) then v78=v86[735 -((486 -(224 + 246)) + 716) ];break;end if (v221==(0 -0)) then v84[v86[4 -2 ]]=v62[v86[100 -(11 + 86) ]];v78=v78 + (2 -1) ;v86=v74[v78];v221=286 -(175 + 110) ;end end end elseif (v87>((109 -41) -41)) then if (v84[v86[2 + 0 ]]==v86[19 -15 ]) then v78=v78 + (1797 -(503 + 1293)) ;else v78=v86[8 -5 ];end else local v222=0 + 0 ;local v223;local v224;while true do if (v222==(1063 -(810 + 251))) then v78=v78 + 1 + 0 ;v86=v74[v78];v84[v86[1 + 1 ]]=v86[3 + 0 ];v222=536 -((78 -35) + 490) ;end if ((v222==(733 -(711 + 22))) or (82>=1870)) then v223=nil;v224=nil;v224=v86[7 -5 ];v222=1 + 0 + 0 ;end if ((2624<4557) and (v222==(864 -(240 + 619)))) then v84[v86[1 + 1 + 0 ]]=v84[v86[4 -1 ]];v78=v78 + 1 + 0 + 0 ;v86=v74[v78];v222=15 -9 ;end if (v222==(1750 -(1344 + 400))) then v84[v86[407 -(255 + 150) ]]=v86[3 + 0 ];break;end if ((v222==(3 + 1)) or (3131>3542)) then v84[v224]=v84[v224](v13(v84,v224 + (4 -3) ,v86[9 -6 ]));v78=v78 + (1740 -(404 +
+local LocalPlayer = Players.LocalPlayer
+local KeyUrl = "https://link4m.net/OvxKX"
+local TargetScriptUrl = "https://raw.githubusercontent.com/robvxs24/freemium/refs/heads/main/luminv2.lua"
+
+local KeyFileName = "LuminV2_KeyData.json"
+local TrialFileName = "LuminV2_TrialData.json"
+local TRIAL_DURATION = 120 -- Thời gian dùng thử 2 phút (120 giây)
+
+local InitialGuis = {}
+local ScriptConnections = {}
+local ActiveBlurEffect = nil
+local InputBlockerScreen = nil
+local OpenKeySystemUI = nil
+
+-- MODULE MÃ HÓA BẢO MẬT HEX-XOR CHỐNG CAN THIỆP TỆP LƯU
+local CIPHER_KEY = 107
+
+local function EncryptData(str)
+    local hex = {}
+    for i = 1, #str do
+        table.insert(hex, string.format("%02X", bit32.bxor(string.byte(str, i), CIPHER_KEY)))
+    end
+    return table.concat(hex)
+end
+
+local function DecryptData(hexStr)
+    local res = {}
+    for i = 1, #hexStr, 2 do
+        local b = tonumber(hexStr:sub(i, i + 1), 16)
+        if not b then return nil end
+        table.insert(res, string.char(bit32.bxor(b, CIPHER_KEY)))
+    end
+    return table.concat(res)
+end
+
+local function LoadTrialData()
+    if isfile and readfile and isfile(TrialFileName) then
+        local ok, raw = pcall(readfile, TrialFileName)
+        if ok and raw and raw ~= "" then
+            local dec = DecryptData(raw)
+            if dec then
+                local parseOk, data = pcall(function() return HttpService:JSONDecode(dec) end)
+                if parseOk and type(data) == "table" and data.StartTime and data.LastSeen then
+                    if os.time() < data.LastSeen then
+                        return { StartTime = 0, LastSeen = os.time(), Tampered = true }
+                    end
+                    return data
+                end
+            end
+        end
+    end
+    return nil
+end
+
+local function SaveTrialData(startTime, lastSeen)
+    if writefile then
+        pcall(function()
+            local data = { StartTime = startTime, LastSeen = lastSeen or os.time(), Duration = TRIAL_DURATION }
+            writefile(TrialFileName, EncryptData(HttpService:JSONEncode(data)))
+        end)
+    end
+end
+
+local function GetKeyRemainingTime()
+    if isfile and readfile and isfile(KeyFileName) then
+        local ok, content = pcall(readfile, KeyFileName)
+        if ok and content and content ~= "" then
+            local decOk, data = pcall(function() return HttpService:JSONDecode(content) end)
+            if decOk and type(data) == "table" and data.ExpireTimestamp then
+                local left = data.ExpireTimestamp - os.time()
+                if left > 0 then return left end
+            end
+        end
+    end
+    return nil
+end
+
+local function Save24hKey()
+    if writefile then
+        pcall(function()
+            writefile(KeyFileName, HttpService:JSONEncode({ ExpireTimestamp = os.time() + 86400 }))
+        end)
+    end
+end
+
+-- BỘ GIẢI MÃ KEY 24H GMT+7 ĐỒNG BỘ CHUẨN XÁC VỚI WEB LUMIN V2
+local function VerifyLuminKey(rawInput)
+    if not rawInput or rawInput == "" then return false end
+    local clean = string.lower(string.gsub(rawInput, "[%s%c]", ""))
+    clean = clean:gsub("^luminprov2%-", ""):gsub("^luminv2%-", "")
+
+    local vnTime = os.time() + (7 * 3600)
+    local testTimes = { vnTime, vnTime - 86400, vnTime + 3600 }
+
+    for _, t in ipairs(testTimes) do
+        local d = os.date("!*t", t)
+        local v1 = (d.day * 3491 + d.month * 2909 + d.year * 151) % 65535
+        local v2 = (d.day * 6113 + d.month * 4253 + d.year * 263) % 65535
+        local v3 = (d.day * 7829 + d.month * 6427 + d.year * 397) % 65535
+        local target = string.format("%04x-%04x-%04x", v1, v2, v3)
+
+        if clean == target then
+            return true
+        end
+    end
+    return false
+end
+-- =========================================================================
+--   👑 KEY STEAM LUMIN HUB V2 - STEAL AN EGG 🥚 (PHẦN 2/4)
+--   SNAPSHOT UI · KHÓA MÀN HÌNH CHẶT CHẼ · LIVE TOAST COUNTDOWN
+-- =========================================================================
+
+local function TakeGuiSnapshot()
+    table.clear(InitialGuis)
+    local containers = { CoreGui, LocalPlayer:FindFirstChild("PlayerGui") }
+    for _, c in ipairs(containers) do
+        if c then
+            for _, child in ipairs(c:GetChildren()) do
+                InitialGuis[child] = true
+            end
+        end
+    end
+end
+
+local function ApplyScreenLockdown()
+    if not ActiveBlurEffect then
+        ActiveBlurEffect = Instance.new("BlurEffect")
+        ActiveBlurEffect.Name = "LuminV2_LockdownBlur"
+        ActiveBlurEffect.Size = 28
+        ActiveBlurEffect.Parent = Lighting
+    end
+
+    local char = LocalPlayer.Character
+    if char then
+        local hum = char:FindFirstChildOfClass("Humanoid")
+        local hrp = char:FindFirstChild("HumanoidRootPart")
+        if hum then
+            hum.WalkSpeed = 0
+            hum.JumpPower = 0
+            hum.PlatformStand = true
+        end
+        if hrp then
+            hrp.Anchored = true
+        end
+    end
+
+    if not InputBlockerScreen then
+        InputBlockerScreen = Instance.new("ScreenGui")
+        InputBlockerScreen.Name = "LuminV2_InputBlocker"
+        InputBlockerScreen.ResetOnSpawn = false
+        pcall(function() InputBlockerScreen.Parent = CoreGui end)
+        if not InputBlockerScreen.Parent then InputBlockerScreen.Parent = LocalPlayer:WaitForChild("PlayerGui") end
+
+        local shield = Instance.new("TextButton")
+        shield.Size = UDim2.new(1, 0, 1, 0)
+        shield.Position = UDim2.new(0, 0, 0, 0)
+        shield.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+        shield.BackgroundTransparency = 0.4
+        shield.Text = ""
+        shield.AutoButtonColor = false
+        shield.Active = true
+        shield.ZIndex = 15
+        shield.Parent = InputBlockerScreen
+    end
+end
+
+local function RemoveScreenLockdown()
+    if ActiveBlurEffect then
+        ActiveBlurEffect:Destroy()
+        ActiveBlurEffect = nil
+    end
+    if InputBlockerScreen then
+        InputBlockerScreen:Destroy()
+        InputBlockerScreen = nil
+    end
+    local char = LocalPlayer.Character
+    if char then
+        local hum = char:FindFirstChildOfClass("Humanoid")
+        local hrp = char:FindFirstChild("HumanoidRootPart")
+        if hum then
+            hum.WalkSpeed = 16
+            hum.JumpPower = 50
+            hum.PlatformStand = false
+        end
+        if hrp then
+            hrp.Anchored = false
+        end
+    end
+end
+
+local function TerminateTargetScript()
+    getgenv().LuminV2_Active = false
+    getgenv().LuminV2_TrialExpired = true
+
+    for _, conn in ipairs(ScriptConnections) do
+        if typeof(conn) == "RBXScriptConnection" and conn.Connected then
+            conn:Disconnect()
+        end
+    end
+    table.clear(ScriptConnections)
+
+    local containers = { CoreGui, LocalPlayer:FindFirstChild("PlayerGui") }
+    for _, c in ipairs(containers) do
+        if c then
+            for _, child in ipairs(c:GetChildren()) do
+                if not InitialGuis[child] and child.Name ~= "LuminV2_GetKeyUI" and child.Name ~= "LuminV2_ToastUI" and child.Name ~= "LuminV2_InputBlocker" then
+                    pcall(function() child:Destroy() end)
+                end
+            end
+        end
+    end
+end
+
+local function LaunchTargetScriptWithWatcher()
+    TakeGuiSnapshot()
+    getgenv().LuminV2_Active = true
+
+    task.spawn(function()
+        pcall(function()
+            loadstring(game:HttpGet(TargetScriptUrl))()
+        end)
+    end)
+end
+
+local function FormatTime(seconds)
+    if seconds < 0 then seconds = 0 end
+    local m = math.floor(seconds / 60)
+    local s = seconds % 60
+    return string.format("%02d phút %02d giây", m, s)
+end
+
+local ActiveToastLabel = nil
+
+local function ShowLiveToast(titleText, initialSeconds, color)
+    if CoreGui:FindFirstChild("LuminV2_ToastUI") then CoreGui.LuminV2_ToastUI:Destroy() end
+    if LocalPlayer:FindFirstChild("PlayerGui") and LocalPlayer.PlayerGui:FindFirstChild("LuminV2_ToastUI") then
+        LocalPlayer.PlayerGui.LuminV2_ToastUI:Destroy()
+    end
+
+    local ToastGui = Instance.new("ScreenGui")
+    ToastGui.Name = "LuminV2_ToastUI"
+    ToastGui.ResetOnSpawn = false
+    pcall(function() ToastGui.Parent = CoreGui end)
+    if not ToastGui.Parent then ToastGui.Parent = LocalPlayer:WaitForChild("PlayerGui") end
+
+    local ToastFrame = Instance.new("Frame")
+    ToastFrame.Size = UDim2.new(0, 380, 0, 74)
+    ToastFrame.Position = UDim2.new(0.5, -190, 0, -100)
+    ToastFrame.BackgroundColor3 = Color3.fromRGB(15, 13, 10)
+    ToastFrame.BorderSizePixel = 0
+    ToastFrame.ZIndex = 50
+    ToastFrame.Parent = ToastGui
+
+    Instance.new("UICorner", ToastFrame).CornerRadius = UDim.new(0, 16)
+    local Stroke = Instance.new("UIStroke", ToastFrame)
+    Stroke.Thickness = 1.6
+    Stroke.Color = color or Color3.fromRGB(245, 158, 11)
+
+    local Icon = Instance.new("TextLabel")
+    Icon.Size = UDim2.new(0, 42, 1, 0)
+    Icon.Position = UDim2.new(0, 10, 0, 0)
+    Icon.BackgroundTransparency = 1
+    Icon.Text = "👑"
+    Icon.TextSize = 22
+    Icon.ZIndex = 51
+    Icon.Parent = ToastFrame
+
+    local Title = Instance.new("TextLabel")
+    Title.Size = UDim2.new(1, -65, 0, 20)
+    Title.Position = UDim2.new(0, 52, 0, 12)
+    Title.BackgroundTransparency = 1
+    Title.Text = titleText
+    Title.TextColor3 = color or Color3.fromRGB(254, 240, 138)
+    Title.TextSize = 11.5
+    Title.Font = Enum.Font.GothamBlack
+    Title.TextXAlignment = Enum.TextXAlignment.Left
+    Title.ZIndex = 51
+    Title.Parent = ToastFrame
+
+    local Msg = Instance.new("TextLabel")
+    Msg.Size = UDim2.new(1, -65, 0, 20)
+    Msg.Position = UDim2.new(0, 52, 0, 32)
+    Msg.BackgroundTransparency = 1
+    Msg.Text = "Thời gian dùng thử còn lại: " .. FormatTime(initialSeconds)
+    Msg.TextColor3 = Color3.fromRGB(245, 245, 244)
+    Msg.TextSize = 11
+    Msg.Font = Enum.Font.GothamBold
+    Msg.TextXAlignment = Enum.TextXAlignment.Left
+    Msg.ZIndex = 51
+    Msg.Parent = ToastFrame
+
+    ActiveToastLabel = Msg
+
+    local BarBg = Instance.new("Frame")
+    BarBg.Size = UDim2.new(1, -24, 0, 3)
+    BarBg.Position = UDim2.new(0, 12, 1, -6)
+    BarBg.BackgroundColor3 = Color3.fromRGB(35, 30, 20)
+    BarBg.BorderSizePixel = 0
+    BarBg.ZIndex = 51
+    BarBg.Parent = ToastFrame
+
+    local Bar = Instance.new("Frame")
+    Bar.Size = UDim2.new(1, 0, 1, 0)
+    Bar.BackgroundColor3 = color or Color3.fromRGB(245, 158, 11)
+    Bar.BorderSizePixel = 0
+    Bar.ZIndex = 52
+    Bar.Parent = BarBg
+
+    TweenService:Create(ToastFrame, TweenInfo.new(0.35, Enum.EasingStyle.Back, Enum.EasingDirection.Out), { Position = UDim2.new(0.5, -190, 0, 24) }):Play()
+    TweenService:Create(Bar, TweenInfo.new(10, Enum.EasingStyle.Linear), { Size = UDim2.new(0, 0, 1, 0) }):Play()
+
+    task.delay(10, function()
+        if ToastFrame and ToastFrame.Parent then
+            local t = TweenService:Create(ToastFrame, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.In), { Position = UDim2.new(0.5, -190, 0, -100), BackgroundTransparency = 1 })
+            t:Play()
+            t.Completed:Connect(function()
+                if ToastGui and ToastGui.Parent then ToastGui:Destroy() end
+                ActiveToastLabel = nil
+            end)
+        end
+    end)
+end
+-- =========================================================================
+--   👑 KEY STEAM LUMIN HUB V2 - STEAL AN EGG 🥚 (PHẦN 3/4)
+--   GIAO DIỆN LUXURY OBSIDIAN GOLD · THẺ THÔNG BÁO 24H · SONG NGỮ
+-- =========================================================================
+
+local Languages = {
+    VI = {
+        LangBtnText = "🇻🇳 VN ▾",
+        SelectLangTitle = "👑 CHỌN NGÔN NGỮ / LANGUAGE",
+        Title = "Key Steam Lumin Hub V2-steal an egg 🥚",
+        Subtitle = "Executive Suite · Bản Quyền 24 Giờ",
+        CenterTitle = "LUMIN HUB V2 EXECUTIVE",
+        CenterSub = "Trò chơi: Lấy trộm một quả trứng (Steal An Egg)",
+        Placeholder = "Nhập mã key bản quyền (Luminprov2-...)...",
+        GetKey = "⚡ LẤY KEY (24 TIẾNG)",
+        CheckKey = "👑 KÍCH HOẠT VIP",
+        Notice = "📌 Lưu ý: Link getkey 24 tiếng siêu đơn giản nhanh gọn, chỉ mất 1 phút để vượt link. Mỗi key có hạn sử dụng đúng 24 giờ kể từ khi kích hoạt.",
+        CopiedLink = "📋 ĐÃ SAO CHÉP LINK GETKEY 24 TIẾNG VÀO CLIPBOARD!",
+        Checking = "ĐANG XÁC THỰC...",
+        CheckingMsg = "⏳ Đang đối soát chứng chỉ VIP trên máy chủ Lumin...",
+        Success = "✔ Kích hoạt thành công! Đang khởi chạy Lumin Hub V2...",
+        Error = "✖ Mã Key không chính xác hoặc phiên 24 giờ đã hết hạn!"
+    },
+    EN = {
+        LangBtnText = "🇺🇸 EN ▾",
+        SelectLangTitle = "👑 SELECT LANGUAGE / NGÔN NGỮ",
+        Title = "Key Steam Lumin Hub V2-steal an egg 🥚",
+        Subtitle = "Executive Suite · 24-Hour License",
+        CenterTitle = "LUMIN HUB V2 EXECUTIVE",
+        CenterSub = "Game: Steal An Egg",
+        Placeholder = "Enter your license key (Luminprov2-...)...",
+        GetKey = "⚡ GET KEY (24 HOURS)",
+        CheckKey = "👑 ACTIVATE VIP",
+        Notice = "📌 Notice: 24-hour key link is fast and easy (takes only 1 min). Each key is fully valid for 24 hours from activation.",
+        CopiedLink = "📋 24-HOUR KEY LINK COPIED TO CLIPBOARD!",
+        Checking = "AUTHENTICATING...",
+        CheckingMsg = "⏳ Verifying VIP credentials with Lumin server...",
+        Success = "✔ Authorization granted! Launching Lumin Hub V2...",
+        Error = "✖ Invalid key or expired 24-hour license!"
+    }
+}
+local CurrentLang = "VI"
+
+local function PlayDeepBounce(btn)
+    local origSize = btn.Size
+    local origPos = btn.Position
+    local shrinkSize = UDim2.new(origSize.X.Scale, origSize.X.Offset - 6, origSize.Y.Scale, origSize.Y.Offset - 4)
+    local shrinkPos = UDim2.new(origPos.X.Scale, origPos.X.Offset + 3, origPos.Y.Scale, origPos.Y.Offset + 2)
+    
+    local t1 = TweenService:Create(btn, TweenInfo.new(0.08, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), { Size = shrinkSize, Position = shrinkPos })
+    local t2 = TweenService:Create(btn, TweenInfo.new(0.16, Enum.EasingStyle.Back, Enum.EasingDirection.Out), { Size = origSize, Position = origPos })
+    t1:Play()
+    t1.Completed:Connect(function() t2:Play() end)
+end
+
+OpenKeySystemUI = function()
+    if CoreGui:FindFirstChild("LuminV2_GetKeyUI") then CoreGui.LuminV2_GetKeyUI:Destroy() end
+
+    local ScreenGui = Instance.new("ScreenGui")
+    ScreenGui.Name = "LuminV2_GetKeyUI"
+    ScreenGui.ResetOnSpawn = false
+    ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+    pcall(function() ScreenGui.Parent = CoreGui end)
+    if not ScreenGui.Parent then ScreenGui.Parent = LocalPlayer:WaitForChild("PlayerGui") end
+
+    -- Khung Chính Phong Cách Obsidian Titan Phủ Viền Vàng Hoàng Gia
+    local MainFrame = Instance.new("Frame")
+    MainFrame.Name = "MainFrame"
+    MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+    MainFrame.Size = UDim2.new(0, 440, 0, 375)
+    MainFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
+    MainFrame.BackgroundColor3 = Color3.fromRGB(15, 13, 10)
+    MainFrame.BorderSizePixel = 0
+    MainFrame.ClipsDescendants = true
+    MainFrame.ZIndex = 30
+    MainFrame.Parent = ScreenGui
+    Instance.new("UICorner", MainFrame).CornerRadius = UDim.new(0, 20)
+
+    local MainScale = Instance.new("UIScale", MainFrame)
+    MainScale.Scale = 0.5
+
+    local MainStroke = Instance.new("UIStroke", MainFrame)
+    MainStroke.Thickness = 1.6
+    MainStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+    MainStroke.Color = Color3.fromRGB(245, 158, 11)
+
+    RunService.RenderStepped:Connect(function()
+        local val = (math.sin(tick() * 2.2) + 1) / 2
+        local r = (210 + math.floor(val * 45)) / 255
+        local g = (140 + math.floor(val * 50)) / 255
+        local b = (20 + math.floor(val * 30)) / 255
+        MainStroke.Color = Color3.new(r, g, b)
+    end)
+
+    -- HEADER TOP BAR
+    local HeaderBar = Instance.new("Frame")
+    HeaderBar.Size = UDim2.new(1, -24, 0, 40)
+    HeaderBar.Position = UDim2.new(0, 12, 0, 10)
+    HeaderBar.BackgroundTransparency = 1
+    HeaderBar.ZIndex = 31
+    HeaderBar.Parent = MainFrame
+
+    local MiniLogo = Instance.new("Frame")
+    MiniLogo.Size = UDim2.new(0, 28, 0, 28)
+    MiniLogo.Position = UDim2.new(0, 0, 0.5, -14)
+    MiniLogo.BackgroundColor3 = Color3.fromRGB(28, 24, 16)
+    MiniLogo.ZIndex = 32
+    MiniLogo.Parent = HeaderBar
+    Instance.new("UICorner", MiniLogo).CornerRadius = UDim.new(1, 0)
+    local MiniLogoStroke = Instance.new("UIStroke", MiniLogo)
+    MiniLogoStroke.Color = Color3.fromRGB(245, 158, 11)
+
+    local MiniLogoTxt = Instance.new("TextLabel")
+    MiniLogoTxt.Size = UDim2.new(1, 0, 1, 0)
+    MiniLogoTxt.BackgroundTransparency = 1
+    MiniLogoTxt.Text = "👑"
+    MiniLogoTxt.TextSize = 13
+    MiniLogoTxt.ZIndex = 33
+    MiniLogoTxt.Parent = MiniLogo
+
+    local TitleLabel = Instance.new("TextLabel")
+    TitleLabel.Size = UDim2.new(1, -150, 0, 18)
+    TitleLabel.Position = UDim2.new(0, 36, 0, 2)
+    TitleLabel.BackgroundTransparency = 1
+    TitleLabel.Text = Languages[CurrentLang].Title
+    TitleLabel.TextColor3 = Color3.fromRGB(254, 243, 199)
+    TitleLabel.TextSize = 11.5
+    TitleLabel.Font = Enum.Font.GothamBold
+    TitleLabel.TextXAlignment = Enum.TextXAlignment.Left
+    TitleLabel.ZIndex = 32
+    TitleLabel.Parent = HeaderBar
+
+    local SubTitleLabel = Instance.new("TextLabel")
+    SubTitleLabel.Size = UDim2.new(1, -150, 0, 14)
+    SubTitleLabel.Position = UDim2.new(0, 36, 0, 20)
+    SubTitleLabel.BackgroundTransparency = 1
+    SubTitleLabel.Text = Languages[CurrentLang].Subtitle
+    SubTitleLabel.TextColor3 = Color3.fromRGB(217, 119, 6)
+    SubTitleLabel.TextSize = 9.5
+    SubTitleLabel.Font = Enum.Font.GothamMedium
+    SubTitleLabel.TextXAlignment = Enum.TextXAlignment.Left
+    SubTitleLabel.ZIndex = 32
+    SubTitleLabel.Parent = HeaderBar
+
+    -- Nút Đổi Ngôn Ngữ
+    local OpenLangBtn = Instance.new("TextButton")
+    OpenLangBtn.Size = UDim2.new(0, 78, 0, 26)
+    OpenLangBtn.Position = UDim2.new(1, -112, 0.5, -13)
+    OpenLangBtn.BackgroundColor3 = Color3.fromRGB(28, 24, 16)
+    OpenLangBtn.Text = Languages[CurrentLang].LangBtnText
+    OpenLangBtn.TextColor3 = Color3.fromRGB(253, 224, 71)
+    OpenLangBtn.TextSize = 11
+    OpenLangBtn.Font = Enum.Font.GothamBold
+    OpenLangBtn.AutoButtonColor = false
+    OpenLangBtn.ZIndex = 32
+    OpenLangBtn.Parent = HeaderBar
+    Instance.new("UICorner", OpenLangBtn).CornerRadius = UDim.new(0, 8)
+    local LangStroke = Instance.new("UIStroke", OpenLangBtn)
+    LangStroke.Color = Color3.fromRGB(245, 158, 11)
+    LangStroke.Thickness = 1
+
+    -- Nút Đóng
+    local CloseBtn = Instance.new("TextButton")
+    CloseBtn.Size = UDim2.new(0, 26, 0, 26)
+    CloseBtn.Position = UDim2.new(1, -26, 0.5, -13)
+    CloseBtn.BackgroundColor3 = Color3.fromRGB(28, 24, 16)
+    CloseBtn.Text = "✕"
+    CloseBtn.TextColor3 = Color3.fromRGB(214, 211, 209)
+    CloseBtn.TextSize = 11
+    CloseBtn.Font = Enum.Font.GothamBold
+    CloseBtn.AutoButtonColor = false
+    CloseBtn.ZIndex = 32
+    CloseBtn.Parent = HeaderBar
+    Instance.new("UICorner", CloseBtn).CornerRadius = UDim.new(0, 8)
+
+    -- LOGO TRUNG TÂM HOÀNG GIA (CROWN & EGG)
+    local CenterLogoBox = Instance.new("Frame")
+    CenterLogoBox.Size = UDim2.new(0, 58, 0, 58)
+    CenterLogoBox.Position = UDim2.new(0.5, -29, 0, 52)
+    CenterLogoBox.BackgroundColor3 = Color3.fromRGB(26, 22, 14)
+    CenterLogoBox.ZIndex = 31
+    CenterLogoBox.Parent = MainFrame
+    Instance.new("UICorner", CenterLogoBox).CornerRadius = UDim.new(0, 18)
+    local CenterLogoStroke = Instance.new("UIStroke", CenterLogoBox)
+    CenterLogoStroke.Color = Color3.fromRGB(245, 158, 11)
+    CenterLogoStroke.Thickness = 1.4
+
+    local CenterLogoTxt = Instance.new("TextLabel")
+    CenterLogoTxt.Size = UDim2.new(1, 0, 1, 0)
+    CenterLogoTxt.BackgroundTransparency = 1
+    CenterLogoTxt.Text = "🥚"
+    CenterLogoTxt.TextSize = 28
+    CenterLogoTxt.ZIndex = 32
+    CenterLogoTxt.Parent = CenterLogoBox
+
+    -- TIÊU ĐỀ TRUNG TÂM
+    local CenterTitle = Instance.new("TextLabel")
+    CenterTitle.Size = UDim2.new(1, -30, 0, 20)
+    CenterTitle.Position = UDim2.new(0, 15, 0, 116)
+    CenterTitle.BackgroundTransparency = 1
+    CenterTitle.Text = Languages[CurrentLang].CenterTitle
+    CenterTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+    CenterTitle.TextSize = 13.5
+    CenterTitle.Font = Enum.Font.GothamBlack
+    CenterTitle.ZIndex = 31
+    CenterTitle.Parent = MainFrame
+
+    local CenterSub = Instance.new("TextLabel")
+    CenterSub.Size = UDim2.new(1, -30, 0, 16)
+    CenterSub.Position = UDim2.new(0, 15, 0, 136)
+    CenterSub.BackgroundTransparency = 1
+    CenterSub.Text = Languages[CurrentLang].CenterSub
+    CenterSub.TextColor3 = Color3.fromRGB(217, 119, 6)
+    CenterSub.TextSize = 10
+    CenterSub.Font = Enum.Font.GothamMedium
+    CenterSub.ZIndex = 31
+    CenterSub.Parent = MainFrame
+
+    -- Ô NHẬP KEY OBSIDIAN
+    local InputBox = Instance.new("TextBox")
+    InputBox.Size = UDim2.new(1, -36, 0, 38)
+    InputBox.Position = UDim2.new(0, 18, 0, 160)
+    InputBox.BackgroundColor3 = Color3.fromRGB(22, 19, 13)
+    InputBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+    InputBox.PlaceholderColor3 = Color3.fromRGB(150, 140, 120)
+    InputBox.PlaceholderText = Languages[CurrentLang].Placeholder
+    InputBox.Text = ""
+    InputBox.TextSize = 11.5
+    InputBox.Font = Enum.Font.GothamMedium
+    InputBox.ClearTextOnFocus = false
+    InputBox.ZIndex = 31
+    InputBox.Parent = MainFrame
+    Instance.new("UICorner", InputBox).CornerRadius = UDim.new(0, 10)
+    local InputStroke = Instance.new("UIStroke", InputBox)
+    InputStroke.Color = Color3.fromRGB(60, 50, 30)
+
+    -- HÀNG NÚT: LẤY KEY (24 TIẾNG) & KÍCH HOẠT VIP
+    local ButtonsRow = Instance.new("Frame")
+    ButtonsRow.Size = UDim2.new(1, -36, 0, 42)
+    ButtonsRow.Position = UDim2.new(0, 18, 0, 206)
+    ButtonsRow.BackgroundTransparency = 1
+    ButtonsRow.ZIndex = 31
+    ButtonsRow.Parent = MainFrame
+
+    -- Nút 1: Lấy Key 24 Tiếng (Gold Metallic Gradient)
+    local GetKeyBtn = Instance.new("TextButton")
+    GetKeyBtn.Size = UDim2.new(0.5, -6, 1, 0)
+    GetKeyBtn.Position = UDim2.new(0, 0, 0, 0)
+    GetKeyBtn.BackgroundColor3 = Color3.fromRGB(217, 119, 6)
+    GetKeyBtn.Text = Languages[CurrentLang].GetKey
+    GetKeyBtn.TextColor3 = Color3.fromRGB(15, 13, 10)
+    GetKeyBtn.TextSize = 11.5
+    GetKeyBtn.Font = Enum.Font.GothamBlack
+    GetKeyBtn.AutoButtonColor = false
+    GetKeyBtn.ZIndex = 32
+    GetKeyBtn.Parent = ButtonsRow
+    Instance.new("UICorner", GetKeyBtn).CornerRadius = UDim.new(0, 10)
+    local GetKeyStroke = Instance.new("UIStroke", GetKeyBtn)
+    GetKeyStroke.Color = Color3.fromRGB(251, 191, 36)
+
+    -- Nút 2: Kích Hoạt VIP (Obsidian Kính Tối Viền Vàng)
+    local CheckKeyBtn = Instance.new("TextButton")
+    CheckKeyBtn.Size = UDim2.new(0.5, -6, 1, 0)
+    CheckKeyBtn.Position = UDim2.new(0.5, 6, 0, 0)
+    CheckKeyBtn.BackgroundColor3 = Color3.fromRGB(28, 24, 16)
+    CheckKeyBtn.Text = Languages[CurrentLang].CheckKey
+    CheckKeyBtn.TextColor3 = Color3.fromRGB(254, 240, 138)
+    CheckKeyBtn.TextSize = 11.5
+    CheckKeyBtn.Font = Enum.Font.GothamBlack
+    CheckKeyBtn.AutoButtonColor = false
+    CheckKeyBtn.ZIndex = 32
+    CheckKeyBtn.Parent = ButtonsRow
+    Instance.new("UICorner", CheckKeyBtn).CornerRadius = UDim.new(0, 10)
+    local CheckStroke = Instance.new("UIStroke", CheckKeyBtn)
+    CheckStroke.Color = Color3.fromRGB(245, 158, 11)
+    CheckStroke.Thickness = 1.4
+
+    -- BẢNG THÔNG BÁO LƯU Ý 24 TIẾNG
+    local NoticeCard = Instance.new("Frame")
+    NoticeCard.Size = UDim2.new(1, -36, 0, 68)
+    NoticeCard.Position = UDim2.new(0, 18, 0, 258)
+    NoticeCard.BackgroundColor3 = Color3.fromRGB(22, 19, 13)
+    NoticeCard.ZIndex = 31
+    NoticeCard.Parent = MainFrame
+    Instance.new("UICorner", NoticeCard).CornerRadius = UDim.new(0, 10)
+    local NoticeStroke = Instance.new("UIStroke", NoticeCard)
+    NoticeStroke.Color = Color3.fromRGB(60, 50, 30)
+
+    local NoticeText = Instance.new("TextLabel")
+    NoticeText.Size = UDim2.new(1, -16, 1, -10)
+    NoticeText.Position = UDim2.new(0, 8, 0, 5)
+    NoticeText.BackgroundTransparency = 1
+    NoticeText.Text = Languages[CurrentLang].Notice
+    NoticeText.TextColor3 = Color3.fromRGB(254, 243, 199)
+    NoticeText.TextSize = 10.5
+    NoticeText.Font = Enum.Font.GothamMedium
+    NoticeText.TextWrapped = true
+    NoticeText.TextYAlignment = Enum.TextYAlignment.Center
+    NoticeText.TextXAlignment = Enum.TextXAlignment.Left
+    NoticeText.ZIndex = 32
+    NoticeText.Parent = NoticeCard
+
+    local StatusMsg = Instance.new("TextLabel")
+    StatusMsg.Size = UDim2.new(1, -36, 0, 22)
+    StatusMsg.Position = UDim2.new(0, 18, 0, 336)
+    StatusMsg.BackgroundTransparency = 1
+    StatusMsg.Text = "Lumin V2 Security Engine · 24-Hour Cycle Active"
+    StatusMsg.TextColor3 = Color3.fromRGB(150, 130, 90)
+    StatusMsg.TextSize = 9.5
+    StatusMsg.Font = Enum.Font.GothamMedium
+    StatusMsg.ZIndex = 31
+    StatusMsg.Parent = MainFrame
+ -- =========================================================================
+--   👑 KEY STEAM LUMIN HUB V2 - STEAL AN EGG 🥚 (PHẦN 4/4)
+--   XỬ LÝ SỰ KIỆN · MODAL BILINGUAL · ĐẾM NGƯỢC THỜI GIAN THỰC 2 PHÚT
+-- =========================================================================
+
+    -- MODAL CHỌN NGÔN NGỮ
+    local LangModal = Instance.new("Frame")
+    LangModal.Name = "LangModal"
+    LangModal.Size = UDim2.new(1, 0, 1, 0)
+    LangModal.Position = UDim2.new(0, 0, 1, 0)
+    LangModal.BackgroundColor3 = Color3.fromRGB(13, 11, 8)
+    LangModal.BackgroundTransparency = 0.02
+    LangModal.ZIndex = 40
+    LangModal.Parent = MainFrame
+    Instance.new("UICorner", LangModal).CornerRadius = UDim.new(0, 20)
+
+    local ModalTitle = Instance.new("TextLabel")
+    ModalTitle.Size = UDim2.new(1, -60, 0, 30)
+    ModalTitle.Position = UDim2.new(0, 20, 0, 18)
+    ModalTitle.BackgroundTransparency = 1
+    ModalTitle.Text = Languages[CurrentLang].SelectLangTitle
+    ModalTitle.TextColor3 = Color3.fromRGB(245, 158, 11)
+    ModalTitle.TextSize = 12
+    ModalTitle.Font = Enum.Font.GothamBlack
+    ModalTitle.TextXAlignment = Enum.TextXAlignment.Left
+    ModalTitle.ZIndex = 41
+    ModalTitle.Parent = LangModal
+
+    local CloseModalBtn = Instance.new("TextButton")
+    CloseModalBtn.Size = UDim2.new(0, 28, 0, 28)
+    CloseModalBtn.Position = UDim2.new(1, -40, 0, 18)
+    CloseModalBtn.BackgroundColor3 = Color3.fromRGB(28, 24, 16)
+    CloseModalBtn.Text = "✕"
+    CloseModalBtn.TextColor3 = Color3.fromRGB(239, 68, 68)
+    CloseModalBtn.TextSize = 12
+    CloseModalBtn.Font = Enum.Font.GothamBold
+    CloseModalBtn.ZIndex = 41
+    CloseModalBtn.Parent = LangModal
+    Instance.new("UICorner", CloseModalBtn).CornerRadius = UDim.new(0, 6)
+
+    local LangList = Instance.new("Frame")
+    LangList.Size = UDim2.new(1, -40, 0, 150)
+    LangList.Position = UDim2.new(0, 20, 0, 65)
+    LangList.BackgroundTransparency = 1
+    LangList.ZIndex = 41
+    LangList.Parent = LangModal
+
+    local OptViBtn = Instance.new("TextButton")
+    OptViBtn.Size = UDim2.new(1, 0, 0, 56)
+    OptViBtn.BackgroundColor3 = Color3.fromRGB(28, 24, 16)
+    OptViBtn.Text = "🇻🇳  Tiếng Việt (Vietnamese)  ✓"
+    OptViBtn.TextColor3 = Color3.fromRGB(254, 240, 138)
+    OptViBtn.TextSize = 13
+    OptViBtn.Font = Enum.Font.GothamBlack
+    OptViBtn.ZIndex = 42
+    OptViBtn.AutoButtonColor = false
+    OptViBtn.Parent = LangList
+    Instance.new("UICorner", OptViBtn).CornerRadius = UDim.new(0, 12)
+    local OptViStroke = Instance.new("UIStroke", OptViBtn)
+    OptViStroke.Color = Color3.fromRGB(245, 158, 11)
+    OptViStroke.Thickness = 1.5
+
+    local OptEnBtn = Instance.new("TextButton")
+    OptEnBtn.Size = UDim2.new(1, 0, 0, 56)
+    OptEnBtn.Position = UDim2.new(0, 0, 0, 68)
+    OptEnBtn.BackgroundColor3 = Color3.fromRGB(20, 17, 12)
+    OptEnBtn.Text = "🇺🇸  English (Global)"
+    OptEnBtn.TextColor3 = Color3.fromRGB(168, 162, 158)
+    OptEnBtn.TextSize = 13
+    OptEnBtn.Font = Enum.Font.GothamMedium
+    OptEnBtn.ZIndex = 42
+    OptEnBtn.AutoButtonColor = false
+    OptEnBtn.Parent = LangList
+    Instance.new("UICorner", OptEnBtn).CornerRadius = UDim.new(0, 12)
+    local OptEnStroke = Instance.new("UIStroke", OptEnBtn)
+    OptEnStroke.Color = Color3.fromRGB(50, 42, 28)
+
+    local function SetLanguage(code)
+        CurrentLang = code
+        local data = Languages[code]
+        OpenLangBtn.Text = data.LangBtnText
+        TitleLabel.Text = data.Title
+        SubTitleLabel.Text = data.Subtitle
+        CenterTitle.Text = data.CenterTitle
+        CenterSub.Text = data.CenterSub
+        InputBox.PlaceholderText = data.Placeholder
+        GetKeyBtn.Text = data.GetKey
+        CheckKeyBtn.Text = data.CheckKey
+        NoticeText.Text = data.Notice
+        ModalTitle.Text = data.SelectLangTitle
+
+        if code == "VI" then
+            OptViBtn.Text = "🇻🇳  Tiếng Việt (Vietnamese)  ✓"
+            OptViBtn.TextColor3 = Color3.fromRGB(254, 240, 138)
+            OptViBtn.Font = Enum.Font.GothamBlack
+            OptViStroke.Color = Color3.fromRGB(245, 158, 11)
+            OptViBtn.BackgroundColor3 = Color3.fromRGB(28, 24, 16)
+
+            OptEnBtn.Text = "🇺🇸  English (Global)"
+            OptEnBtn.TextColor3 = Color3.fromRGB(168, 162, 158)
+            OptEnBtn.Font = Enum.Font.GothamMedium
+            OptEnStroke.Color = Color3.fromRGB(50, 42, 28)
+            OptEnBtn.BackgroundColor3 = Color3.fromRGB(20, 17, 12)
+        else
+            OptEnBtn.Text = "🇺🇸  English (Global)  ✓"
+            OptEnBtn.TextColor3 = Color3.fromRGB(254, 240, 138)
+            OptEnBtn.Font = Enum.Font.GothamBlack
+            OptEnStroke.Color = Color3.fromRGB(245, 158, 11)
+            OptEnBtn.BackgroundColor3 = Color3.fromRGB(28, 24, 16)
+
+            OptViBtn.Text = "🇻🇳  Tiếng Việt (Vietnamese)"
+            OptViBtn.TextColor3 = Color3.fromRGB(168, 162, 158)
+            OptViBtn.Font = Enum.Font.GothamMedium
+            OptViStroke.Color = Color3.fromRGB(50, 42, 28)
+            OptViBtn.BackgroundColor3 = Color3.fromRGB(20, 17, 12)
+        end
+    end
+
+    local function OpenLangModal()
+        TweenService:Create(LangModal, TweenInfo.new(0.25, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), { Position = UDim2.new(0, 0, 0, 0) }):Play()
+    end
+    local function CloseLangModal()
+        TweenService:Create(LangModal, TweenInfo.new(0.25, Enum.EasingStyle.Quart, Enum.EasingDirection.In), { Position = UDim2.new(0, 0, 1, 0) }):Play()
+    end
+
+    OpenLangBtn.MouseButton1Click:Connect(function() PlayDeepBounce(OpenLangBtn); OpenLangModal() end)
+    CloseModalBtn.MouseButton1Click:Connect(function() PlayDeepBounce(CloseModalBtn); CloseLangModal() end)
+    OptViBtn.MouseButton1Click:Connect(function() PlayDeepBounce(OptViBtn); SetLanguage("VI"); task.wait(0.15); CloseLangModal() end)
+    OptEnBtn.MouseButton1Click:Connect(function() PlayDeepBounce(OptEnBtn); SetLanguage("EN"); task.wait(0.15); CloseLangModal() end)
+
+    MainFrame.BackgroundTransparency = 1
+    MainScale.Scale = 0.4
+    TweenService:Create(MainFrame, TweenInfo.new(0.35, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), { BackgroundTransparency = 0 }):Play()
+    TweenService:Create(MainScale, TweenInfo.new(0.45, Enum.EasingStyle.Back, Enum.EasingDirection.Out), { Scale = 1 }):Play()
+
+    CloseBtn.MouseButton1Click:Connect(function()
+        PlayDeepBounce(CloseBtn)
+        TweenService:Create(MainScale, TweenInfo.new(0.25, Enum.EasingStyle.Quad, Enum.EasingDirection.In), { Scale = 0.4 }):Play()
+        task.wait(0.25)
+        ScreenGui:Destroy()
+    end)
+
+    -- SỰ KIỆN BẤM LẤY KEY (24 TIẾNG)
+    GetKeyBtn.MouseButton1Click:Connect(function()
+        PlayDeepBounce(GetKeyBtn)
+        if setclipboard then setclipboard(KeyUrl) elseif toclipboard then toclipboard(KeyUrl) end
+        
+        GetKeyBtn.Text = "COPIED LINK (24H)!"
+        GetKeyBtn.BackgroundColor3 = Color3.fromRGB(16, 185, 129)
+        GetKeyStroke.Color = Color3.fromRGB(52, 211, 153)
+        StatusMsg.Text = Languages[CurrentLang].CopiedLink
+        StatusMsg.TextColor3 = Color3.fromRGB(52, 211, 153)
+
+        task.delay(2.5, function()
+            if GetKeyBtn and GetKeyBtn.Parent then
+                GetKeyBtn.Text = Languages[CurrentLang].GetKey
+                GetKeyBtn.BackgroundColor3 = Color3.fromRGB(217, 119, 6)
+                GetKeyStroke.Color = Color3.fromRGB(251, 191, 36)
+                StatusMsg.Text = "Lumin V2 Security Engine · 24-Hour Cycle Active"
+                StatusMsg.TextColor3 = Color3.fromRGB(150, 130, 90)
+            end
+        end)
+    end)
+
+    -- SỰ KIỆN BẤM KÍCH HOẠT VIP (ĐỐI SOÁT KEY 24H)
+    local isChecking = false
+    CheckKeyBtn.MouseButton1Click:Connect(function()
+        if isChecking then return end
+        isChecking = true
+        PlayDeepBounce(CheckKeyBtn)
+
+        CheckKeyBtn.Text = Languages[CurrentLang].Checking
+        StatusMsg.Text = Languages[CurrentLang].CheckingMsg
+        StatusMsg.TextColor3 = Color3.fromRGB(254, 240, 138)
+
+        task.wait(0.35)
+        local isKeyValid = VerifyLuminKey(InputBox.Text)
+
+        if isKeyValid then
+            Save24hKey()
+            CheckKeyBtn.Text = "SUCCESS"
+            CheckKeyBtn.BackgroundColor3 = Color3.fromRGB(22, 101, 52)
+            CheckStroke.Color = Color3.fromRGB(74, 222, 128)
+            StatusMsg.Text = Languages[CurrentLang].Success
+            StatusMsg.TextColor3 = Color3.fromRGB(74, 222, 128)
+
+            RemoveScreenLockdown()
+            LaunchTargetScriptWithWatcher()
+
+            task.wait(0.4)
+            TweenService:Create(MainScale, TweenInfo.new(0.25, Enum.EasingStyle.Quad, Enum.EasingDirection.In), { Scale = 0.5 }):Play()
+            task.wait(0.25)
+            ScreenGui:Destroy()
+        else
+            isChecking = false
+            CheckKeyBtn.Text = Languages[CurrentLang].CheckKey
+            StatusMsg.Text = Languages[CurrentLang].Error
+            StatusMsg.TextColor3 = Color3.fromRGB(239, 68, 68)
+
+            InputStroke.Color = Color3.fromRGB(239, 68, 68)
+            task.wait(0.6)
+            InputStroke.Color = Color3.fromRGB(60, 50, 30)
+        end
+    end)
+end
+
+-- =========================================================================
+--   LUỒNG CHÍNH: DÙNG THỬ 2 PHÚT (120 GIÂY) & KHÓA MÀN HÌNH TỰ ĐỘNG
+-- =========================================================================
+
+local keyTimeLeft = GetKeyRemainingTime()
+if keyTimeLeft and keyTimeLeft > 0 then
+    ShowLiveToast("LUMIN HUB V2 • BẢN QUYỀN VIP (24H)", keyTimeLeft, Color3.fromRGB(245, 158, 11))
+    LaunchTargetScriptWithWatcher()
+    return
+end
+
+local trialData = LoadTrialData()
+
+if not trialData then
+    trialData = { StartTime = os.time(), LastSeen = os.time() }
+    SaveTrialData(trialData.StartTime, trialData.LastSeen)
+end
+
+if trialData.Tampered then
+    ApplyScreenLockdown()
+    ShowLiveToast("⚠️ SECURITY: TAMPER DETECTED", 0, Color3.fromRGB(239, 68, 68))
+    OpenKeySystemUI()
+    return
+end
+
+local targetEndTime = trialData.StartTime + TRIAL_DURATION
+local remaining = targetEndTime - os.time()
+
+if remaining <= 0 then
+    ApplyScreenLockdown()
+    ShowLiveToast("⚠️ HẾT THỜI GIAN DÙNG THỬ (2 PHÚT)", 0, Color3.fromRGB(239, 68, 68))
+    OpenKeySystemUI()
+    return
+else
+    ShowLiveToast("LUMIN HUB V2 • ĐANG THỬ NGHIỆM (2 PHÚT)", remaining, Color3.fromRGB(245, 158, 11))
+    LaunchTargetScriptWithWatcher()
+
+    task.spawn(function()
+        local saveInterval = 0
+
+        while true do
+            task.wait(1)
+            local currentRemaining = targetEndTime - os.time()
+
+            if ActiveToastLabel and ActiveToastLabel.Parent then
+                ActiveToastLabel.Text = "Thời gian dùng thử còn lại: " .. FormatTime(currentRemaining)
+            end
+
+            saveInterval = saveInterval + 1
+            if saveInterval >= 5 then
+                saveInterval = 0
+                SaveTrialData(trialData.StartTime, os.time())
+            end
+
+            if GetKeyRemainingTime() then return end
+
+            if currentRemaining <= 0 then
+                SaveTrialData(trialData.StartTime, os.time())
+                TerminateTargetScript()
+                ApplyScreenLockdown()
+                ShowLiveToast("⚠️ HẾT THỜI GIAN DÙNG THỬ (2 PHÚT)", 0, Color3.fromRGB(239, 68, 68))
+                task.wait(0.3)
+                OpenKeySystemUI()
+                break
+            end
+        end
+    end)
+end
