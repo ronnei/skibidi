@@ -1,6 +1,6 @@
 -- =========================================================================
 --   👑 KEY STEAM LUMIN HUB V2 - STEAL AN EGG 🥚 (PHẦN 1/4)
---   CƠ CHẾ BẢN QUYỀN 24H · DÙNG THỬ 2 PHÚT · BẢO MẬT OBSIDIAN GOLD
+--   CHẾ ĐỘ BUỘC GETKEY TRỰC TIẾP · CHU KỲ 24 TIẾNG · GIAO DIỆN OBSIDIAN GOLD
 -- =========================================================================
 
 local TweenService = game:GetService("TweenService")
@@ -15,63 +15,9 @@ local KeyUrl = "https://link4m.net/OvxKX"
 local TargetScriptUrl = "https://raw.githubusercontent.com/robvxs24/freemium/refs/heads/main/luminv2.lua"
 
 local KeyFileName = "LuminV2_KeyData.json"
-local TrialFileName = "LuminV2_TrialData.json"
-local TRIAL_DURATION = 120 -- Thời gian dùng thử 2 phút (120 giây)
-
-local InitialGuis = {}
-local ScriptConnections = {}
 local ActiveBlurEffect = nil
 local InputBlockerScreen = nil
 local OpenKeySystemUI = nil
-
--- MODULE MÃ HÓA BẢO MẬT HEX-XOR CHỐNG CAN THIỆP TỆP LƯU
-local CIPHER_KEY = 107
-
-local function EncryptData(str)
-    local hex = {}
-    for i = 1, #str do
-        table.insert(hex, string.format("%02X", bit32.bxor(string.byte(str, i), CIPHER_KEY)))
-    end
-    return table.concat(hex)
-end
-
-local function DecryptData(hexStr)
-    local res = {}
-    for i = 1, #hexStr, 2 do
-        local b = tonumber(hexStr:sub(i, i + 1), 16)
-        if not b then return nil end
-        table.insert(res, string.char(bit32.bxor(b, CIPHER_KEY)))
-    end
-    return table.concat(res)
-end
-
-local function LoadTrialData()
-    if isfile and readfile and isfile(TrialFileName) then
-        local ok, raw = pcall(readfile, TrialFileName)
-        if ok and raw and raw ~= "" then
-            local dec = DecryptData(raw)
-            if dec then
-                local parseOk, data = pcall(function() return HttpService:JSONDecode(dec) end)
-                if parseOk and type(data) == "table" and data.StartTime and data.LastSeen then
-                    if os.time() < data.LastSeen then
-                        return { StartTime = 0, LastSeen = os.time(), Tampered = true }
-                    end
-                    return data
-                end
-            end
-        end
-    end
-    return nil
-end
-
-local function SaveTrialData(startTime, lastSeen)
-    if writefile then
-        pcall(function()
-            local data = { StartTime = startTime, LastSeen = lastSeen or os.time(), Duration = TRIAL_DURATION }
-            writefile(TrialFileName, EncryptData(HttpService:JSONEncode(data)))
-        end)
-    end
-end
 
 local function GetKeyRemainingTime()
     if isfile and readfile and isfile(KeyFileName) then
@@ -95,7 +41,7 @@ local function Save24hKey()
     end
 end
 
--- BỘ GIẢI MÃ KEY 24H GMT+7 ĐỒNG BỘ CHUẨN XÁC VỚI WEB LUMIN V2
+-- THUẬT TOÁN ĐỐI SOÁT KEY LUMINPROV2 24H (GMT+7)
 local function VerifyLuminKey(rawInput)
     if not rawInput or rawInput == "" then return false end
     local clean = string.lower(string.gsub(rawInput, "[%s%c]", ""))
@@ -119,20 +65,8 @@ local function VerifyLuminKey(rawInput)
 end
 -- =========================================================================
 --   👑 KEY STEAM LUMIN HUB V2 - STEAL AN EGG 🥚 (PHẦN 2/4)
---   SNAPSHOT UI · KHÓA MÀN HÌNH CHẶT CHẼ · LIVE TOAST COUNTDOWN
+--   KHÓA MÀN HÌNH CHẶT CHẼ · TẤM CHẮN INPUT · THÔNG BÁO BẢN QUYỀN
 -- =========================================================================
-
-local function TakeGuiSnapshot()
-    table.clear(InitialGuis)
-    local containers = { CoreGui, LocalPlayer:FindFirstChild("PlayerGui") }
-    for _, c in ipairs(containers) do
-        if c then
-            for _, child in ipairs(c:GetChildren()) do
-                InitialGuis[child] = true
-            end
-        end
-    end
-end
 
 local function ApplyScreenLockdown()
     if not ActiveBlurEffect then
@@ -200,33 +134,7 @@ local function RemoveScreenLockdown()
     end
 end
 
-local function TerminateTargetScript()
-    getgenv().LuminV2_Active = false
-    getgenv().LuminV2_TrialExpired = true
-
-    for _, conn in ipairs(ScriptConnections) do
-        if typeof(conn) == "RBXScriptConnection" and conn.Connected then
-            conn:Disconnect()
-        end
-    end
-    table.clear(ScriptConnections)
-
-    local containers = { CoreGui, LocalPlayer:FindFirstChild("PlayerGui") }
-    for _, c in ipairs(containers) do
-        if c then
-            for _, child in ipairs(c:GetChildren()) do
-                if not InitialGuis[child] and child.Name ~= "LuminV2_GetKeyUI" and child.Name ~= "LuminV2_ToastUI" and child.Name ~= "LuminV2_InputBlocker" then
-                    pcall(function() child:Destroy() end)
-                end
-            end
-        end
-    end
-end
-
-local function LaunchTargetScriptWithWatcher()
-    TakeGuiSnapshot()
-    getgenv().LuminV2_Active = true
-
+local function LaunchTargetScript()
     task.spawn(function()
         pcall(function()
             loadstring(game:HttpGet(TargetScriptUrl))()
@@ -234,16 +142,7 @@ local function LaunchTargetScriptWithWatcher()
     end)
 end
 
-local function FormatTime(seconds)
-    if seconds < 0 then seconds = 0 end
-    local m = math.floor(seconds / 60)
-    local s = seconds % 60
-    return string.format("%02d phút %02d giây", m, s)
-end
-
-local ActiveToastLabel = nil
-
-local function ShowLiveToast(titleText, initialSeconds, color)
+local function ShowStatusToast(titleText, descText, color)
     if CoreGui:FindFirstChild("LuminV2_ToastUI") then CoreGui.LuminV2_ToastUI:Destroy() end
     if LocalPlayer:FindFirstChild("PlayerGui") and LocalPlayer.PlayerGui:FindFirstChild("LuminV2_ToastUI") then
         LocalPlayer.PlayerGui.LuminV2_ToastUI:Destroy()
@@ -256,7 +155,7 @@ local function ShowLiveToast(titleText, initialSeconds, color)
     if not ToastGui.Parent then ToastGui.Parent = LocalPlayer:WaitForChild("PlayerGui") end
 
     local ToastFrame = Instance.new("Frame")
-    ToastFrame.Size = UDim2.new(0, 380, 0, 74)
+    ToastFrame.Size = UDim2.new(0, 380, 0, 68)
     ToastFrame.Position = UDim2.new(0.5, -190, 0, -100)
     ToastFrame.BackgroundColor3 = Color3.fromRGB(15, 13, 10)
     ToastFrame.BorderSizePixel = 0
@@ -293,7 +192,7 @@ local function ShowLiveToast(titleText, initialSeconds, color)
     Msg.Size = UDim2.new(1, -65, 0, 20)
     Msg.Position = UDim2.new(0, 52, 0, 32)
     Msg.BackgroundTransparency = 1
-    Msg.Text = "Thời gian dùng thử còn lại: " .. FormatTime(initialSeconds)
+    Msg.Text = descText
     Msg.TextColor3 = Color3.fromRGB(245, 245, 244)
     Msg.TextSize = 11
     Msg.Font = Enum.Font.GothamBold
@@ -301,40 +200,21 @@ local function ShowLiveToast(titleText, initialSeconds, color)
     Msg.ZIndex = 51
     Msg.Parent = ToastFrame
 
-    ActiveToastLabel = Msg
-
-    local BarBg = Instance.new("Frame")
-    BarBg.Size = UDim2.new(1, -24, 0, 3)
-    BarBg.Position = UDim2.new(0, 12, 1, -6)
-    BarBg.BackgroundColor3 = Color3.fromRGB(35, 30, 20)
-    BarBg.BorderSizePixel = 0
-    BarBg.ZIndex = 51
-    BarBg.Parent = ToastFrame
-
-    local Bar = Instance.new("Frame")
-    Bar.Size = UDim2.new(1, 0, 1, 0)
-    Bar.BackgroundColor3 = color or Color3.fromRGB(245, 158, 11)
-    Bar.BorderSizePixel = 0
-    Bar.ZIndex = 52
-    Bar.Parent = BarBg
-
     TweenService:Create(ToastFrame, TweenInfo.new(0.35, Enum.EasingStyle.Back, Enum.EasingDirection.Out), { Position = UDim2.new(0.5, -190, 0, 24) }):Play()
-    TweenService:Create(Bar, TweenInfo.new(10, Enum.EasingStyle.Linear), { Size = UDim2.new(0, 0, 1, 0) }):Play()
 
-    task.delay(10, function()
+    task.delay(4, function()
         if ToastFrame and ToastFrame.Parent then
             local t = TweenService:Create(ToastFrame, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.In), { Position = UDim2.new(0.5, -190, 0, -100), BackgroundTransparency = 1 })
             t:Play()
             t.Completed:Connect(function()
                 if ToastGui and ToastGui.Parent then ToastGui:Destroy() end
-                ActiveToastLabel = nil
             end)
         end
     end)
 end
 -- =========================================================================
 --   👑 KEY STEAM LUMIN HUB V2 - STEAL AN EGG 🥚 (PHẦN 3/4)
---   GIAO DIỆN LUXURY OBSIDIAN GOLD · THẺ THÔNG BÁO 24H · SONG NGỮ
+--   GIAO DIỆN VIP OBSIDIAN TITAN · BẢNG THÔNG BÁO 24H · HỖ TRỢ SONG NGỮ
 -- =========================================================================
 
 local Languages = {
@@ -352,7 +232,7 @@ local Languages = {
         CopiedLink = "📋 ĐÃ SAO CHÉP LINK GETKEY 24 TIẾNG VÀO CLIPBOARD!",
         Checking = "ĐANG XÁC THỰC...",
         CheckingMsg = "⏳ Đang đối soát chứng chỉ VIP trên máy chủ Lumin...",
-        Success = "✔ Kích hoạt thành công! Đang khởi chạy Lumin Hub V2...",
+        Success = "✔ Kích hoạt thành công! Đang tải Lumin Hub V2...",
         Error = "✖ Mã Key không chính xác hoặc phiên 24 giờ đã hết hạn!"
     },
     EN = {
@@ -397,7 +277,6 @@ OpenKeySystemUI = function()
     pcall(function() ScreenGui.Parent = CoreGui end)
     if not ScreenGui.Parent then ScreenGui.Parent = LocalPlayer:WaitForChild("PlayerGui") end
 
-    -- Khung Chính Phong Cách Obsidian Titan Phủ Viền Vàng Hoàng Gia
     local MainFrame = Instance.new("Frame")
     MainFrame.Name = "MainFrame"
     MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
@@ -426,7 +305,7 @@ OpenKeySystemUI = function()
         MainStroke.Color = Color3.new(r, g, b)
     end)
 
-    -- HEADER TOP BAR
+    -- HEADER
     local HeaderBar = Instance.new("Frame")
     HeaderBar.Size = UDim2.new(1, -24, 0, 40)
     HeaderBar.Position = UDim2.new(0, 12, 0, 10)
@@ -453,7 +332,7 @@ OpenKeySystemUI = function()
     MiniLogoTxt.Parent = MiniLogo
 
     local TitleLabel = Instance.new("TextLabel")
-    TitleLabel.Size = UDim2.new(1, -150, 0, 18)
+    TitleLabel.Size = UDim2.new(1, -110, 0, 18)
     TitleLabel.Position = UDim2.new(0, 36, 0, 2)
     TitleLabel.BackgroundTransparency = 1
     TitleLabel.Text = Languages[CurrentLang].Title
@@ -465,7 +344,7 @@ OpenKeySystemUI = function()
     TitleLabel.Parent = HeaderBar
 
     local SubTitleLabel = Instance.new("TextLabel")
-    SubTitleLabel.Size = UDim2.new(1, -150, 0, 14)
+    SubTitleLabel.Size = UDim2.new(1, -110, 0, 14)
     SubTitleLabel.Position = UDim2.new(0, 36, 0, 20)
     SubTitleLabel.BackgroundTransparency = 1
     SubTitleLabel.Text = Languages[CurrentLang].Subtitle
@@ -476,10 +355,9 @@ OpenKeySystemUI = function()
     SubTitleLabel.ZIndex = 32
     SubTitleLabel.Parent = HeaderBar
 
-    -- Nút Đổi Ngôn Ngữ
     local OpenLangBtn = Instance.new("TextButton")
     OpenLangBtn.Size = UDim2.new(0, 78, 0, 26)
-    OpenLangBtn.Position = UDim2.new(1, -112, 0.5, -13)
+    OpenLangBtn.Position = UDim2.new(1, -78, 0.5, -13)
     OpenLangBtn.BackgroundColor3 = Color3.fromRGB(28, 24, 16)
     OpenLangBtn.Text = Languages[CurrentLang].LangBtnText
     OpenLangBtn.TextColor3 = Color3.fromRGB(253, 224, 71)
@@ -493,21 +371,7 @@ OpenKeySystemUI = function()
     LangStroke.Color = Color3.fromRGB(245, 158, 11)
     LangStroke.Thickness = 1
 
-    -- Nút Đóng
-    local CloseBtn = Instance.new("TextButton")
-    CloseBtn.Size = UDim2.new(0, 26, 0, 26)
-    CloseBtn.Position = UDim2.new(1, -26, 0.5, -13)
-    CloseBtn.BackgroundColor3 = Color3.fromRGB(28, 24, 16)
-    CloseBtn.Text = "✕"
-    CloseBtn.TextColor3 = Color3.fromRGB(214, 211, 209)
-    CloseBtn.TextSize = 11
-    CloseBtn.Font = Enum.Font.GothamBold
-    CloseBtn.AutoButtonColor = false
-    CloseBtn.ZIndex = 32
-    CloseBtn.Parent = HeaderBar
-    Instance.new("UICorner", CloseBtn).CornerRadius = UDim.new(0, 8)
-
-    -- LOGO TRUNG TÂM HOÀNG GIA (CROWN & EGG)
+    -- LOGO TRUNG TÂM
     local CenterLogoBox = Instance.new("Frame")
     CenterLogoBox.Size = UDim2.new(0, 58, 0, 58)
     CenterLogoBox.Position = UDim2.new(0.5, -29, 0, 52)
@@ -527,7 +391,7 @@ OpenKeySystemUI = function()
     CenterLogoTxt.ZIndex = 32
     CenterLogoTxt.Parent = CenterLogoBox
 
-    -- TIÊU ĐỀ TRUNG TÂM
+    -- TIÊU ĐỀ NỘI DUNG
     local CenterTitle = Instance.new("TextLabel")
     CenterTitle.Size = UDim2.new(1, -30, 0, 20)
     CenterTitle.Position = UDim2.new(0, 15, 0, 116)
@@ -550,7 +414,7 @@ OpenKeySystemUI = function()
     CenterSub.ZIndex = 31
     CenterSub.Parent = MainFrame
 
-    -- Ô NHẬP KEY OBSIDIAN
+    -- Ô NHẬP KEY
     local InputBox = Instance.new("TextBox")
     InputBox.Size = UDim2.new(1, -36, 0, 38)
     InputBox.Position = UDim2.new(0, 18, 0, 160)
@@ -568,7 +432,7 @@ OpenKeySystemUI = function()
     local InputStroke = Instance.new("UIStroke", InputBox)
     InputStroke.Color = Color3.fromRGB(60, 50, 30)
 
-    -- HÀNG NÚT: LẤY KEY (24 TIẾNG) & KÍCH HOẠT VIP
+    -- NÚT GET KEY & CHECK KEY
     local ButtonsRow = Instance.new("Frame")
     ButtonsRow.Size = UDim2.new(1, -36, 0, 42)
     ButtonsRow.Position = UDim2.new(0, 18, 0, 206)
@@ -576,7 +440,6 @@ OpenKeySystemUI = function()
     ButtonsRow.ZIndex = 31
     ButtonsRow.Parent = MainFrame
 
-    -- Nút 1: Lấy Key 24 Tiếng (Gold Metallic Gradient)
     local GetKeyBtn = Instance.new("TextButton")
     GetKeyBtn.Size = UDim2.new(0.5, -6, 1, 0)
     GetKeyBtn.Position = UDim2.new(0, 0, 0, 0)
@@ -592,7 +455,6 @@ OpenKeySystemUI = function()
     local GetKeyStroke = Instance.new("UIStroke", GetKeyBtn)
     GetKeyStroke.Color = Color3.fromRGB(251, 191, 36)
 
-    -- Nút 2: Kích Hoạt VIP (Obsidian Kính Tối Viền Vàng)
     local CheckKeyBtn = Instance.new("TextButton")
     CheckKeyBtn.Size = UDim2.new(0.5, -6, 1, 0)
     CheckKeyBtn.Position = UDim2.new(0.5, 6, 0, 0)
@@ -609,7 +471,7 @@ OpenKeySystemUI = function()
     CheckStroke.Color = Color3.fromRGB(245, 158, 11)
     CheckStroke.Thickness = 1.4
 
-    -- BẢNG THÔNG BÁO LƯU Ý 24 TIẾNG
+    -- BẢNG THÔNG BÁO 24H
     local NoticeCard = Instance.new("Frame")
     NoticeCard.Size = UDim2.new(1, -36, 0, 68)
     NoticeCard.Position = UDim2.new(0, 18, 0, 258)
@@ -638,18 +500,17 @@ OpenKeySystemUI = function()
     StatusMsg.Size = UDim2.new(1, -36, 0, 22)
     StatusMsg.Position = UDim2.new(0, 18, 0, 336)
     StatusMsg.BackgroundTransparency = 1
-    StatusMsg.Text = "Lumin V2 Security Engine · 24-Hour Cycle Active"
+    StatusMsg.Text = "Lumin V2 Security Engine · Direct Activation Protocol"
     StatusMsg.TextColor3 = Color3.fromRGB(150, 130, 90)
     StatusMsg.TextSize = 9.5
     StatusMsg.Font = Enum.Font.GothamMedium
     StatusMsg.ZIndex = 31
     StatusMsg.Parent = MainFrame
- -- =========================================================================
+    -- =========================================================================
 --   👑 KEY STEAM LUMIN HUB V2 - STEAL AN EGG 🥚 (PHẦN 4/4)
---   XỬ LÝ SỰ KIỆN · MODAL BILINGUAL · ĐẾM NGƯỢC THỜI GIAN THỰC 2 PHÚT
+--   SỰ KIỆN NÚT BẤM · ĐIỀU HƯỚNG BILINGUAL · KHỞI CHẠY TRỰC TIẾP
 -- =========================================================================
 
-    -- MODAL CHỌN NGÔN NGỮ
     local LangModal = Instance.new("Frame")
     LangModal.Name = "LangModal"
     LangModal.Size = UDim2.new(1, 0, 1, 0)
@@ -779,14 +640,7 @@ OpenKeySystemUI = function()
     TweenService:Create(MainFrame, TweenInfo.new(0.35, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), { BackgroundTransparency = 0 }):Play()
     TweenService:Create(MainScale, TweenInfo.new(0.45, Enum.EasingStyle.Back, Enum.EasingDirection.Out), { Scale = 1 }):Play()
 
-    CloseBtn.MouseButton1Click:Connect(function()
-        PlayDeepBounce(CloseBtn)
-        TweenService:Create(MainScale, TweenInfo.new(0.25, Enum.EasingStyle.Quad, Enum.EasingDirection.In), { Scale = 0.4 }):Play()
-        task.wait(0.25)
-        ScreenGui:Destroy()
-    end)
-
-    -- SỰ KIỆN BẤM LẤY KEY (24 TIẾNG)
+    -- BẤM LẤY KEY (24 TIẾNG)
     GetKeyBtn.MouseButton1Click:Connect(function()
         PlayDeepBounce(GetKeyBtn)
         if setclipboard then setclipboard(KeyUrl) elseif toclipboard then toclipboard(KeyUrl) end
@@ -802,13 +656,13 @@ OpenKeySystemUI = function()
                 GetKeyBtn.Text = Languages[CurrentLang].GetKey
                 GetKeyBtn.BackgroundColor3 = Color3.fromRGB(217, 119, 6)
                 GetKeyStroke.Color = Color3.fromRGB(251, 191, 36)
-                StatusMsg.Text = "Lumin V2 Security Engine · 24-Hour Cycle Active"
+                StatusMsg.Text = "Lumin V2 Security Engine · Direct Activation Protocol"
                 StatusMsg.TextColor3 = Color3.fromRGB(150, 130, 90)
             end
         end)
     end)
 
-    -- SỰ KIỆN BẤM KÍCH HOẠT VIP (ĐỐI SOÁT KEY 24H)
+    -- BẤM KÍCH HOẠT VIP
     local isChecking = false
     CheckKeyBtn.MouseButton1Click:Connect(function()
         if isChecking then return end
@@ -831,7 +685,7 @@ OpenKeySystemUI = function()
             StatusMsg.TextColor3 = Color3.fromRGB(74, 222, 128)
 
             RemoveScreenLockdown()
-            LaunchTargetScriptWithWatcher()
+            LaunchTargetScript()
 
             task.wait(0.4)
             TweenService:Create(MainScale, TweenInfo.new(0.25, Enum.EasingStyle.Quad, Enum.EasingDirection.In), { Scale = 0.5 }):Play()
@@ -851,70 +705,19 @@ OpenKeySystemUI = function()
 end
 
 -- =========================================================================
---   LUỒNG CHÍNH: DÙNG THỬ 2 PHÚT (120 GIÂY) & KHÓA MÀN HÌNH TỰ ĐỘNG
+--   LUỒNG CHÍNH: KIỂM TRA BẢN QUYỀN TRỰC TIẾP KHI VỪA EXECUTE
 -- =========================================================================
 
 local keyTimeLeft = GetKeyRemainingTime()
+
 if keyTimeLeft and keyTimeLeft > 0 then
-    ShowLiveToast("LUMIN HUB V2 • BẢN QUYỀN VIP (24H)", keyTimeLeft, Color3.fromRGB(245, 158, 11))
-    LaunchTargetScriptWithWatcher()
-    return
-end
-
-local trialData = LoadTrialData()
-
-if not trialData then
-    trialData = { StartTime = os.time(), LastSeen = os.time() }
-    SaveTrialData(trialData.StartTime, trialData.LastSeen)
-end
-
-if trialData.Tampered then
-    ApplyScreenLockdown()
-    ShowLiveToast("⚠️ SECURITY: TAMPER DETECTED", 0, Color3.fromRGB(239, 68, 68))
-    OpenKeySystemUI()
-    return
-end
-
-local targetEndTime = trialData.StartTime + TRIAL_DURATION
-local remaining = targetEndTime - os.time()
-
-if remaining <= 0 then
-    ApplyScreenLockdown()
-    ShowLiveToast("⚠️ HẾT THỜI GIAN DÙNG THỬ (2 PHÚT)", 0, Color3.fromRGB(239, 68, 68))
-    OpenKeySystemUI()
-    return
+    -- ĐÃ KÍCH HOẠT VÀ CÒN HẠN 24H -> CHẠY THẲNG SCRIPT
+    local hours = math.floor(keyTimeLeft / 3600)
+    local mins = math.floor((keyTimeLeft % 3600) / 60)
+    ShowStatusToast("LUMIN HUB V2 • BẢN QUYỀN VIP", string.format("Phiên hoạt động còn lại: %02d giờ %02d phút", hours, mins), Color3.fromRGB(245, 158, 11))
+    LaunchTargetScript()
 else
-    ShowLiveToast("LUMIN HUB V2 • ĐANG THỬ NGHIỆM (2 PHÚT)", remaining, Color3.fromRGB(245, 158, 11))
-    LaunchTargetScriptWithWatcher()
-
-    task.spawn(function()
-        local saveInterval = 0
-
-        while true do
-            task.wait(1)
-            local currentRemaining = targetEndTime - os.time()
-
-            if ActiveToastLabel and ActiveToastLabel.Parent then
-                ActiveToastLabel.Text = "Thời gian dùng thử còn lại: " .. FormatTime(currentRemaining)
-            end
-
-            saveInterval = saveInterval + 1
-            if saveInterval >= 5 then
-                saveInterval = 0
-                SaveTrialData(trialData.StartTime, os.time())
-            end
-
-            if GetKeyRemainingTime() then return end
-
-            if currentRemaining <= 0 then
-                SaveTrialData(trialData.StartTime, os.time())
-                TerminateTargetScript()
-                ApplyScreenLockdown()
-                ShowLiveToast("⚠️ HẾT THỜI GIAN DÙNG THỬ (2 PHÚT)", 0, Color3.fromRGB(239, 68, 68))
-                task.wait(0.3)
-                OpenKeySystemUI()
-                break
-            end
-        end
-    end)
+    -- CHƯA CÓ KEY HOẶC ĐÃ HẾT HẠN -> KHÓA MÀN HÌNH VÀ MỞ MENU GETKEY NGAY
+    ApplyScreenLockdown()
+    OpenKeySystemUI()
 end
